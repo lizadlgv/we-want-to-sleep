@@ -1,8 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
 
@@ -13,6 +13,5 @@ public class SqrFunctionTest {
         assertEquals (testFunction.apply(-11), 121);
         assertEquals (testFunction.apply(-1), 1);
         assertEquals (testFunction.apply(0.1), 0.01, 0.01);
-
     }
 }
