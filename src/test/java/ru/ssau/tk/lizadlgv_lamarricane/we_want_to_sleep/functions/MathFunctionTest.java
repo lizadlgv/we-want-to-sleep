@@ -18,10 +18,10 @@ public class MathFunctionTest {
     public void testAndThen() {
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertEquals(composite.apply(4), 2.0);
-        softAssert.assertEquals(division.andThen(sqr).apply(16), 64.0);
-        softAssert.assertEquals(root.andThen(constant).apply(7), 3.0);
-        softAssert.assertEquals(unit.andThen(division).andThen(identity).apply(67), 0.5);
+        softAssert.assertEquals(composite.apply(4), 2.0, 0.1);
+        softAssert.assertEquals(division.andThen(sqr).apply(16), 64.0, 0.1);
+        softAssert.assertEquals(root.andThen(constant).apply(7), 3.0, 0.1);
+        softAssert.assertEquals(unit.andThen(division).andThen(identity).apply(67), 0.5, 0.1);
 
         softAssert.assertAll();
     }
