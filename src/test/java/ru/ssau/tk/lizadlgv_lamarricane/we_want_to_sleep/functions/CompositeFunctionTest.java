@@ -3,6 +3,7 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+
 import org.testng.asserts.SoftAssert;
 
 public class CompositeFunctionTest {
@@ -19,7 +20,7 @@ public class CompositeFunctionTest {
         MathFunction identityRoot = new CompositeFunction(identity, root);
         MathFunction rootIdentity = new CompositeFunction(root, identity);
         MathFunction rootConstant = new CompositeFunction(root, constant);
-        MathFunction sqrDivision = new CompositeFunction(sqr,division);
+        MathFunction sqrDivision = new CompositeFunction(sqr, division);
         MathFunction divisionSqr = new CompositeFunction(division, sqr);
         MathFunction sqrSqr = new CompositeFunction(sqr, sqr);
         MathFunction divisionDivision = new CompositeFunction(division, division);

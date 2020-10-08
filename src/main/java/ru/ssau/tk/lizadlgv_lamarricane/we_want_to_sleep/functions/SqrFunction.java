@@ -5,6 +5,6 @@ import java.lang.Math;
 public class SqrFunction implements MathFunction {
     @Override
     public double apply(double x) {
-        return x*x;
+        return x * x;
     }
 }

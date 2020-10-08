@@ -6,11 +6,13 @@ public class ConstantFunction implements MathFunction {
     public double getConstant() {
         return constant;
     }
-    public ConstantFunction (double c) {
+
+    public ConstantFunction(double c) {
         this.constant = c;
     }
+
     @Override
-    public double apply(double x){
+    public double apply(double x) {
         return constant;
     }
 }
