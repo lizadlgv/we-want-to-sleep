@@ -5,7 +5,7 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 public class UnitFunctionTest {
-    UnitFunction testFunction = new UnitFunction();
+    private final UnitFunction testFunction = new UnitFunction();
 
     @Test
     public void testApply() {

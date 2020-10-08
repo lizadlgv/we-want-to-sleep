@@ -16,7 +16,6 @@ public class MathFunctionTest {
 
     @Test
     public void testAndThen() {
-
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(composite.apply(4), 2.0);

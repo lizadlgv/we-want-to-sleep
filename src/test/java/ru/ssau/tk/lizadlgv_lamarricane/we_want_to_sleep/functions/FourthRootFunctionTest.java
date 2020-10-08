@@ -6,10 +6,10 @@ import static org.testng.Assert.*;
 
 public class FourthRootFunctionTest {
     private final static double DELTA = 0.0001;
+    private final FourthRootFunction testFourthRoot = new FourthRootFunction();
 
     @Test
     public void testApply() {
-        FourthRootFunction testFourthRoot = new FourthRootFunction();
         assertEquals(testFourthRoot.apply(16), 2, DELTA);
         assertEquals(testFourthRoot.apply(0.2), 0.6687, DELTA);
         assertEquals(testFourthRoot.apply(507), 4.7451, DELTA);

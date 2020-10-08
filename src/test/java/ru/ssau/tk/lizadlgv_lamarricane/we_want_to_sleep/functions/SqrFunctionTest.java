@@ -5,10 +5,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
+    private final SqrFunction testFunction = new SqrFunction();
 
     @Test
     public void testApply() {
-        SqrFunction testFunction = new SqrFunction();
         assertEquals(testFunction.apply(5), 25);
         assertEquals(testFunction.apply(-11), 121);
         assertEquals(testFunction.apply(-1), 1);

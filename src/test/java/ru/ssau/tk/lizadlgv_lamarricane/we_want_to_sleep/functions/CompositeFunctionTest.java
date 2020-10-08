@@ -6,23 +6,22 @@ import org.testng.asserts.SoftAssert;
 
 public class CompositeFunctionTest {
     private final static double DELTA = 0.0001;
+    private final MathFunction identity = new IdentityFunction();
+    private final MathFunction root = new FourthRootFunction();
+    private final MathFunction constant = new ConstantFunction(5);
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction division = new DivisionFunction();
+
+    private final MathFunction identityRoot = new CompositeFunction(identity, root);
+    private final MathFunction rootIdentity = new CompositeFunction(root, identity);
+    private final MathFunction rootConstant = new CompositeFunction(root, constant);
+    private final MathFunction sqrDivision = new CompositeFunction(sqr, division);
+    private final MathFunction divisionSqr = new CompositeFunction(division, sqr);
+    private final MathFunction sqrSqr = new CompositeFunction(sqr, sqr);
+    private final MathFunction divisionDivision = new CompositeFunction(division, division);
 
     @Test
     public void testApply() {
-        MathFunction identity = new IdentityFunction();
-        MathFunction root = new FourthRootFunction();
-        MathFunction constant = new ConstantFunction(5);
-        MathFunction sqr = new SqrFunction();
-        MathFunction division = new DivisionFunction();
-
-        MathFunction identityRoot = new CompositeFunction(identity, root);
-        MathFunction rootIdentity = new CompositeFunction(root, identity);
-        MathFunction rootConstant = new CompositeFunction(root, constant);
-        MathFunction sqrDivision = new CompositeFunction(sqr, division);
-        MathFunction divisionSqr = new CompositeFunction(division, sqr);
-        MathFunction sqrSqr = new CompositeFunction(sqr, sqr);
-        MathFunction divisionDivision = new CompositeFunction(division, division);
-
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(identityRoot.apply(0.0), 0.0);
