@@ -2,8 +2,6 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 import org.testng.asserts.SoftAssert;
 
 public class CompositeFunctionTest {
