@@ -11,7 +11,7 @@ public class DivisionFunctionTest {
     public void testApply() {
         assertEquals(testDivision.apply(10), 5);
         assertEquals(testDivision.apply(-4), -2);
-        assertEquals(testDivision.apply(1), 0.5);
+        assertEquals(testDivision.apply(1), 0.5, 0.1);
         assertEquals(testDivision.apply(0), 0);
     }
 }
