@@ -9,8 +9,8 @@ public class ConstantFunctionTest {
 
     @Test
     public void testApply() {
-        assertEquals(testFunction.apply(1), 7.0);
-        assertEquals(testFunction.apply(-7.3), 7.0);
-        assertEquals(testFunction.apply(12), 7.0);
+        assertEquals(testFunction.apply(1), 7.0, 0.1);
+        assertEquals(testFunction.apply(-7.3), 7.0, 0.1);
+        assertEquals(testFunction.apply(12), 7.0, 0.1);
     }
 }

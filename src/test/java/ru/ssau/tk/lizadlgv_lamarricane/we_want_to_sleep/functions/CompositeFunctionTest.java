@@ -24,16 +24,16 @@ public class CompositeFunctionTest {
     public void testApply() {
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertEquals(identityRoot.apply(0.0), 0.0);
+        softAssert.assertEquals(identityRoot.apply(0.0), 0.0, DELTA);
         softAssert.assertEquals(identityRoot.apply(507), 4.7451, DELTA);
         softAssert.assertEquals(rootIdentity.apply(16), 2.0);
         softAssert.assertEquals(rootIdentity.apply(0.2), 0.6687, DELTA);
-        softAssert.assertEquals(rootConstant.apply(57), 5.0);
-        softAssert.assertEquals(sqrDivision.apply(4), 8.0);
-        softAssert.assertEquals(divisionSqr.apply(34), 289.0);
-        softAssert.assertEquals(sqrDivision.apply(4), 8.0);
-        softAssert.assertEquals(sqrSqr.apply(6), 1296.0);
-        softAssert.assertEquals(divisionDivision.apply(100), 25.0);
+        softAssert.assertEquals(rootConstant.apply(57), 5.0, DELTA);
+        softAssert.assertEquals(sqrDivision.apply(4), 8.0, DELTA);
+        softAssert.assertEquals(divisionSqr.apply(34), 289.0, DELTA);
+        softAssert.assertEquals(sqrDivision.apply(4), 8.0, DELTA);
+        softAssert.assertEquals(sqrSqr.apply(6), 1296.0, DELTA);
+        softAssert.assertEquals(divisionDivision.apply(100), 25.0, DELTA);
 
         softAssert.assertAll();
     }
