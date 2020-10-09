@@ -26,7 +26,7 @@ public class CompositeFunctionTest {
 
         softAssert.assertEquals(identityRoot.apply(0.0), 0.0, DELTA);
         softAssert.assertEquals(identityRoot.apply(507), 4.7451, DELTA);
-        softAssert.assertEquals(rootIdentity.apply(16), 2.0);
+        softAssert.assertEquals(rootIdentity.apply(16), 2.0, DELTA);
         softAssert.assertEquals(rootIdentity.apply(0.2), 0.6687, DELTA);
         softAssert.assertEquals(rootConstant.apply(57), 5.0, DELTA);
         softAssert.assertEquals(sqrDivision.apply(4), 8.0, DELTA);
