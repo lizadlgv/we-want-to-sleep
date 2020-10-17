@@ -9,6 +9,6 @@ public class UnitFunctionTest {
 
     @Test
     public void testApply() {
-        assertEquals(testFunction.getConstant(), 1);
+        assertEquals(testFunction.getConstant(), 1, 0.1);
     }
 }
