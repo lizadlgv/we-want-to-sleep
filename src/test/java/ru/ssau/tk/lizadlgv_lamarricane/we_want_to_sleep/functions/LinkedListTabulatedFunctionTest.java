@@ -120,4 +120,17 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(sampleSqr().extrapolateRight(9.), 51., DELTA);
         softAssert.assertAll();
     }
+
+    @Test
+    public void testApply() {
+        softAssert.assertEquals(sampleFunction().apply(-3.), -3., DELTA);
+        softAssert.assertEquals(sampleFunction().apply(5.), 23., DELTA);
+        softAssert.assertEquals(sampleFunction().apply(2.), 4., DELTA);
+        softAssert.assertEquals(sampleFunction().apply(2.5), 6.5, DELTA);
+        softAssert.assertEquals(sampleSqr().apply(-7.), -7., DELTA);
+        softAssert.assertEquals(sampleSqr().apply(9.), 51., DELTA);
+        softAssert.assertEquals(sampleSqr().apply(4.), 16., DELTA);
+        softAssert.assertEquals(sampleSqr().apply(1.2), 1.6, DELTA);
+        softAssert.assertAll();
+    }
 }
