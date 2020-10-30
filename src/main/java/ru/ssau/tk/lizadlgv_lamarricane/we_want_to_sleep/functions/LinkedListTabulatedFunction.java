@@ -3,34 +3,32 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
-    private void addNode(double x, double y) {
+    public void addNode(double x, double y) {
         Node newNode = new Node();
-
+        newNode.x = x;
+        newNode.y = y;
         if (head == null) {
+            count = 0;
             head = newNode;
-            newNode.next = newNode;
             newNode.prev = newNode;
-            newNode.x = x;
-            newNode.y = y;
+            newNode.next = newNode;
         } else {
-            head.prev.next = newNode;
-            head.prev = newNode;
-            newNode.prev = head.prev;
+            Node last = head.prev;
+            newNode.prev = last;
             newNode.next = head;
-            newNode.x = x;
-            newNode.y = y;
+            last.next = newNode;
         }
+        head.prev = newNode;
+        count++;
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        this.count = xValues.length;
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        this.count = count;
         double step = (xTo - xFrom) / (count - 1);
         if (xFrom < xTo) {
             for (int i = 0; i < count; i++) {
@@ -63,6 +61,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             }
         }
         return someNode;
+    }
+
+    private Node floorNodeOfX(double x) {
+        Node someNode = head;
+
+        if (x < leftBound()) {
+            return head;
+        }
+        for (int i = 0; i < count; i++) {
+            if (someNode.x <= x) {
+                someNode = someNode.next;
+            } else {
+                return someNode.prev;
+            }
+        }
+        return head.prev;
     }
 
     @Override
@@ -165,5 +179,30 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node left = getNode(floorIndex);
         Node right = left.next;
         return interpolate(x, left.x, right.x, left.y, right.y);
+    }
+
+    protected double interpolate(double x, Node floorNode) {
+        if (head.x == head.prev.x) {
+            return x;
+        }
+
+        Node left = floorNode;
+        Node right = left.next;
+        return interpolate(x, left.x, right.x, left.y, right.y);
+    }
+
+    @Override
+    public double apply(double x) {
+        if (x < leftBound()) {
+            return extrapolateLeft(x);
+        }
+        if (x > rightBound()) {
+            return extrapolateRight(x);
+        }
+        if (indexOfX(x) != -1) {
+            return getY(indexOfX(x));
+        } else {
+            return interpolate(x, floorNodeOfX(x));
+        }
     }
 }
