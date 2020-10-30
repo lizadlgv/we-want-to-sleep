@@ -123,4 +123,19 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(getDefinedThroughMathFunction().apply(13), 152.66667, DELTA);
         assertNotEquals(getDefinedThroughMathFunction().apply(100), 10, DELTA);
     }
+
+    @Test
+    public void testComplexFunctions() {
+        double xFrom = 5;
+        double xTo = 10;
+        int count = 64;
+        MathFunction sqr = new SqrFunction();
+        MathFunction div = new DivisionFunction();
+        MathFunction unit = new UnitFunction();
+        ArrayTabulatedFunction f = new ArrayTabulatedFunction(div.andThen(sqr).andThen(unit), xFrom, xTo, count);
+        LinkedListTabulatedFunction g = new LinkedListTabulatedFunction(div.andThen(sqr).andThen(unit), xFrom, xTo, count);
+        assertEquals(f.getY(0), g.getY(0), 0.001);
+        assertEquals(f.getY(1), g.getY(1), 0.001);
+        assertEquals(f.getY(2), g.getY(2), 0.001);
+    }
 }
