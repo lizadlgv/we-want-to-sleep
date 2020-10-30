@@ -12,6 +12,7 @@ public class LinkedListTabulatedFunctionTest {
     private final double[] valuesY = new double[]{0., 1., 4., 9., 16.};
 
     private final MathFunction sqr = new SqrFunction();
+    private final MathFunction division = new DivisionFunction();
 
     public LinkedListTabulatedFunction sampleFunction() {
         return new LinkedListTabulatedFunction(valuesX, valuesY);
@@ -131,6 +132,19 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(sampleSqr().apply(9.), 51., DELTA);
         softAssert.assertEquals(sampleSqr().apply(4.), 16., DELTA);
         softAssert.assertEquals(sampleSqr().apply(1.2), 1.6, DELTA);
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testComplexFunction() {
+        softAssert.assertEquals(sampleFunction().andThen(sqr).apply(-3.), 9., DELTA);
+        softAssert.assertEquals(sampleFunction().andThen(sqr).apply(5.), 529., DELTA);
+        softAssert.assertEquals(sampleFunction().andThen(sqr).apply(2.), 16., DELTA);
+        softAssert.assertEquals(sampleFunction().andThen(sqr).apply(2.5), 42.25, DELTA);
+        softAssert.assertEquals(sampleSqr().andThen(division).apply(-7.), -3.5, DELTA);
+        softAssert.assertEquals(sampleSqr().andThen(division).apply(9.), 25.5, DELTA);
+        softAssert.assertEquals(sampleSqr().andThen(division).apply(4.), 8., DELTA);
+        softAssert.assertEquals(sampleSqr().andThen(division).apply(1.2), 0.8, DELTA);
         softAssert.assertAll();
     }
 }
