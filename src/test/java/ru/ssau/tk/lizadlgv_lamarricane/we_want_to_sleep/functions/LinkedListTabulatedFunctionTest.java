@@ -47,15 +47,27 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testGetX() {
+        softAssert.assertEquals(sampleFunction().getX(0), 0., DELTA);
         softAssert.assertEquals(sampleFunction().getX(2), 2., DELTA);
-        softAssert.assertEquals(sampleSqr().getX(1), 1., DELTA);
+        softAssert.assertEquals(sampleFunction().getX(1), 1., DELTA);
+        softAssert.assertEquals(sampleFunction().getX(4), 4., DELTA);
+        softAssert.assertEquals(sampleSqr().getX(0), 0., DELTA);
+        softAssert.assertEquals(sampleSqr().getX(2), 2., DELTA);
+        softAssert.assertEquals(sampleSqr().getX(3), 3., DELTA);
+        softAssert.assertEquals(sampleSqr().getX(4), 4., DELTA);
         softAssert.assertAll();
     }
 
     @Test
     public void testGetY() {
+        softAssert.assertEquals(sampleFunction().getY(0), 0., DELTA);
+        softAssert.assertEquals(sampleFunction().getY(2), 4., DELTA);
         softAssert.assertEquals(sampleFunction().getY(1), 1., DELTA);
+        softAssert.assertEquals(sampleFunction().getY(4), 16., DELTA);
+        softAssert.assertEquals(sampleSqr().getY(0), 0., DELTA);
         softAssert.assertEquals(sampleSqr().getY(2), 4., DELTA);
+        softAssert.assertEquals(sampleSqr().getY(3), 9., DELTA);
+        softAssert.assertEquals(sampleSqr().getY(4), 16., DELTA);
         softAssert.assertAll();
     }
 
