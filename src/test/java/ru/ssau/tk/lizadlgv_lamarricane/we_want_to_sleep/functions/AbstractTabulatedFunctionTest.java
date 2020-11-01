@@ -16,9 +16,9 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testApply() {
-        assertEquals(mockFunction.apply(7), 9, DELTA);
-        assertEquals(mockFunction.apply(-7), -19, DELTA);
-        assertNotEquals(mockFunction.apply(2), 1, DELTA);
+        assertEquals(mockFunction.apply(7), 6, DELTA);
+        assertEquals(mockFunction.apply(-7), -8, DELTA);
+        assertEquals(mockFunction.apply(2), 1, DELTA);
         assertNotEquals(mockFunction.apply(1), 5, DELTA);
     }
 }
