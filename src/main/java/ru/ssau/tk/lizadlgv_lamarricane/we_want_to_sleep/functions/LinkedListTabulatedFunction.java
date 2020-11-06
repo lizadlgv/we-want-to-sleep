@@ -3,6 +3,13 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
+    private static class Node {
+        public Node next;
+        public Node prev;
+        public double x;
+        public double y;
+    }
+
     public void addNode(double x, double y) {
         Node newNode = new Node();
         newNode.x = x;
