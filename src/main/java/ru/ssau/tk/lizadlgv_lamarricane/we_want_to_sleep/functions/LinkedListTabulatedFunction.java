@@ -1,5 +1,7 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
@@ -205,5 +207,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         } else {
             return interpolate(x, floorNodeOfX(x));
         }
+    }
+
+    @Override
+    public Iterator iterator() {
+        throw new UnsupportedOperationException();
     }
 }

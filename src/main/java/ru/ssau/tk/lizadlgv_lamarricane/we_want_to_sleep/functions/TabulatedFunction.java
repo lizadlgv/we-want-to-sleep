@@ -1,6 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
-public interface TabulatedFunction extends MathFunction {
+public interface TabulatedFunction extends MathFunction, Iterable<Point> {
     int getCount(); //метод получения количества табулированных значений
 
     double getX(int index); //метод, получающий значение аргумента x по номеру индекса
