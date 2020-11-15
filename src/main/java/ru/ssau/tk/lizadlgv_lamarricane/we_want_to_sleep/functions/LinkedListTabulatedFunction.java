@@ -30,12 +30,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2 || yValues.length < 2) {
+            throw new IllegalArgumentException("Size of list is less than minimum (2)");
+        }
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Size of list is less than minimum (2)");
+        }
+        if (xFrom >= xTo) {
+            throw new IllegalArgumentException("Max X is less, than min X");
+        }
         double step = (xTo - xFrom) / (count - 1);
         if (xFrom < xTo) {
             for (int i = 0; i < count; i++) {
@@ -46,8 +55,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node getNode(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         Node someNode;
-
         if (index > (count / 2)) {
             someNode = head.prev;
             for (int i = count - 1; i > 0; i--) {
@@ -71,11 +82,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     private Node floorNodeOfX(double x) {
-        Node someNode = head;
-
-        if (x < leftBound()) {
-            return head;
+        if (x < head.x) {
+            throw new IllegalArgumentException("X is less than minimal value in linked list");
         }
+        Node someNode = head;
         for (int i = 0; i < count; i++) {
             if (someNode.x <= x) {
                 someNode = someNode.next;
@@ -146,11 +156,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected int floorIndexOfX(double x) {
-        Node someNode = head;
-
-        if (x < leftBound()) {
-            return 0;
+        if (x < head.x) {
+            throw new IllegalArgumentException("X is less than minimal value in linked list");
         }
+        Node someNode = head;
         for (int i = 0; i < count; i++) {
             if (someNode.x <= x) {
                 someNode = someNode.next;
@@ -163,39 +172,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double extrapolateLeft(double x) {
-        if (head.x == head.prev.x) {
-            return x;
-        }
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        if (head.x == head.prev.x) {
-            return x;
-        }
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (head.x == head.prev.x) {
-            return x;
-        }
-
         Node left = getNode(floorIndex);
         Node right = left.next;
         return interpolate(x, left.x, right.x, left.y, right.y);
     }
 
     protected double interpolate(double x, Node floorNode) {
-        if (head.x == head.prev.x) {
-            return x;
-        }
-
-        Node left = floorNode;
-        Node right = left.next;
-        return interpolate(x, left.x, right.x, left.y, right.y);
+        Node right = floorNode.next;
+        return interpolate(x, floorNode.x, right.x, floorNode.y, right.y);
     }
 
     @Override

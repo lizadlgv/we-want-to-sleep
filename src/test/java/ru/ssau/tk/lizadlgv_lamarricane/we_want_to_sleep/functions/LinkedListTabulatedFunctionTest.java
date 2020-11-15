@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 
 import org.testng.asserts.SoftAssert;
 
+import static org.testng.Assert.*;
+
 public class LinkedListTabulatedFunctionTest {
 
     private final static double DELTA = 0.0001;
@@ -54,6 +56,10 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(sampleSqr().getX(2), 2., DELTA);
         softAssert.assertEquals(sampleSqr().getX(3), 3., DELTA);
         softAssert.assertEquals(sampleSqr().getX(4), 4., DELTA);
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleFunction().getX(100));
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleSqr().getX(-200));
         softAssert.assertAll();
     }
 
@@ -67,6 +73,10 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(sampleSqr().getY(2), 4., DELTA);
         softAssert.assertEquals(sampleSqr().getY(3), 9., DELTA);
         softAssert.assertEquals(sampleSqr().getY(4), 16., DELTA);
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleFunction().getY(50));
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleSqr().getY(-1));
         softAssert.assertAll();
     }
 
@@ -80,6 +90,7 @@ public class LinkedListTabulatedFunctionTest {
 
         softAssert.assertEquals(testSample.getY(1), 42., DELTA);
         softAssert.assertEquals(testSampleSqr.getY(1), 42., DELTA);
+        softAssert.assertAll();
         softAssert.assertAll();
     }
 
@@ -105,8 +116,11 @@ public class LinkedListTabulatedFunctionTest {
     public void testFloorIndexOfX() {
         softAssert.assertEquals(sampleFunction().floorIndexOfX(3.5), 3, DELTA);
         softAssert.assertEquals(sampleSqr().floorIndexOfX(16.), 4, DELTA);
-        softAssert.assertEquals(sampleFunction().floorIndexOfX(-1.), 0, DELTA);
         softAssert.assertEquals(sampleSqr().floorIndexOfX(0), 0, DELTA);
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleFunction().floorIndexOfX(-10));
+        assertThrows(IllegalArgumentException.class, () ->
+                sampleSqr().floorIndexOfX(-1));
         softAssert.assertAll();
     }
 
