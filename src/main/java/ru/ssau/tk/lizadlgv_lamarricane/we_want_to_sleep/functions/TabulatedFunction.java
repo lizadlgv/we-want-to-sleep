@@ -1,19 +1,19 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 public interface TabulatedFunction extends MathFunction, Iterable<Point> {
-    int getCount(); //метод получения количества табулированных значений
+    int getCount();
 
-    double getX(int index); //метод, получающий значение аргумента x по номеру индекса
+    double getX(int index);
 
-    double getY(int index); //метод, получающий значение аргумента x по номеру индекса
+    double getY(int index);
 
-    void setY(int index, double value); //метод, получающий значение аргумента x по номеру индекса
+    void setY(int index, double value);
 
-    int indexOfX(double x); //метод, возвращающий индекс аргумента x
+    int indexOfX(double x);
 
-    int indexOfY(double y); //метод, возвращающий индекс первого вхождения значения y
+    int indexOfY(double y);
 
-    double leftBound(); //метод, возвращающий самый левый x
+    double leftBound();
 
-    double rightBound(); //метод, возвращающий самый правый x
+    double rightBound();
 }
