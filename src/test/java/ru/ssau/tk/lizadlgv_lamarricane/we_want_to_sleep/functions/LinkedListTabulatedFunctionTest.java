@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 
 import org.testng.asserts.SoftAssert;
 
+import java.util.Iterator;
+
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -172,6 +174,24 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(f.andThen(g).andThen(h).apply(8.), 369664., DELTA);
         softAssert.assertEquals(f.andThen(g).andThen(h).apply(2.), 256., DELTA);
         softAssert.assertEquals(f.andThen(g).andThen(h).apply(2.5), 1722.25, DELTA);
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testIterator() {
+        LinkedListTabulatedFunction testSample = sampleFunction();
+        Iterator<Point> iterator = testSample.iterator();
+        int i = 0;
+        int j = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            softAssert.assertEquals(testSample.getX(i), point.x, DELTA);
+            softAssert.assertEquals(testSample.getY(i++), point.y, DELTA);
+        }
+        for (Point point : testSample) {
+            softAssert.assertEquals(testSample.getX(j), point.x, DELTA);
+            softAssert.assertEquals(testSample.getY(j++), point.y, DELTA);
+        }
         softAssert.assertAll();
     }
 }

@@ -1,6 +1,7 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
@@ -210,7 +211,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException();
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private Node node = head;
+
+            public boolean hasNext() {
+                return (node != null);
+            }
+
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(node.x, node.y);
+                node = (node != head.prev) ? node.next : null;
+                return point;
+            }
+        };
     }
 }

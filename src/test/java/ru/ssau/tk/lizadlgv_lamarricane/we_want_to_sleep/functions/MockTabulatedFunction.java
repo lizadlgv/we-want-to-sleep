@@ -1,6 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
-import static org.testng.Assert.*;
+import java.util.Iterator;
 
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
     final double x0 = 2.0;
@@ -92,5 +92,10 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double rightBound() {
         return x1;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
