@@ -1,8 +1,5 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -120,6 +117,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
+
     @Override
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
@@ -142,6 +140,3 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         };
     }
 }
-
-
-

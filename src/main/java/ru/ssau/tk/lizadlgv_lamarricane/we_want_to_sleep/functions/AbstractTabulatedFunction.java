@@ -31,6 +31,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
             return interpolate(x, floorIndexOfX(x));
         }
     }
+
     static protected void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
             throw new DifferentLengthOfArraysException("Lengths of arrays are different");

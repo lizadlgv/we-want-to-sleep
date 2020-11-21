@@ -1,6 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions;
 
-public class InterpolationException extends RuntimeException{
+public class InterpolationException extends RuntimeException {
     public InterpolationException() {
     }
 

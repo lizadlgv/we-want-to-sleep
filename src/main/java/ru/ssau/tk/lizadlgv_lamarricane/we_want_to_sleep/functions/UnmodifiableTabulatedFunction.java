@@ -3,7 +3,7 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 import java.util.Iterator;
 
 public class UnmodifiableTabulatedFunction implements TabulatedFunction {
-    private TabulatedFunction function;
+    final private TabulatedFunction function;
 
     public UnmodifiableTabulatedFunction(TabulatedFunction function) {
         this.function = function;
@@ -64,5 +64,5 @@ public class UnmodifiableTabulatedFunction implements TabulatedFunction {
     @Override
     public double apply(double x) {
         return function.apply(x);
-        }
+    }
 }
