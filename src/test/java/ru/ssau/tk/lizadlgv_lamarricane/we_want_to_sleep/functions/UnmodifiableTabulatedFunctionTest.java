@@ -36,14 +36,8 @@ public class UnmodifiableTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        TabulatedFunction array = new UnmodifiableTabulatedFunction(
-                new ArrayTabulatedFunction(new double[]{-1., 6., 9.}, new double[]{-1., 3., 10.}));
-        TabulatedFunction list = new UnmodifiableTabulatedFunction(
-                new LinkedListTabulatedFunction(new double[]{-1., 6., 9., 13.}, new double[]{-1., 3., 10., 11}));
-        array.setY(0, 2.);
-        list.setY(3, 1.);
-        assertEquals(array.getY(0), 2., DELTA);
-        assertEquals(list.getY(3), 1., DELTA);
+        assertThrows(UnsupportedOperationException.class, () -> array.setY(0, 2.));
+        assertThrows(UnsupportedOperationException.class, () -> list.setY(3, 1.));
         assertThrows(UnsupportedOperationException.class, () -> unmodifiableInStrict.setY(1, 2.5));
     }
 
@@ -79,7 +73,9 @@ public class UnmodifiableTabulatedFunctionTest {
 
     @Test
     public void testApply() {
-        assertEquals(array.apply(9.5), 11.16666, DELTA);
-        assertEquals(list.apply(13.1), 11.025, DELTA);
+        assertEquals(array.apply(-1), -1., DELTA);
+        assertEquals(array.apply(2), 0.7142, DELTA);
+        assertEquals(list.apply(-3), -2.1428, DELTA);
+        assertEquals(list.apply(5), 2.4285, DELTA);
     }
 }
