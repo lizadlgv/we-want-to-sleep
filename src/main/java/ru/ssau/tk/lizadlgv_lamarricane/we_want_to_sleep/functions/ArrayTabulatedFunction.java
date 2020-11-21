@@ -1,5 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
+
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -119,5 +122,20 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public Iterator iterator() {
         throw new UnsupportedOperationException();
     }
+
+    static protected void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length) {
+            throw new DifferentLengthOfArraysException("Lengths of arrays are different");
+        }
+    }
+
+    static protected void checkSorted(double[] xValues) {
+        for (int i = 0; i < xValues.length - 1; i++) {
+            if (xValues[i] >= xValues[i + 1]) {
+                throw new ArrayIsNotSortedException("xValues array isn't sorted");
+            }
+        }
+    }
 }
+
 
