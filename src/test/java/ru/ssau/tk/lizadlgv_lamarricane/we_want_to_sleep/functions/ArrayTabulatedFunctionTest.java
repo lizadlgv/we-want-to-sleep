@@ -2,6 +2,9 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
 
+import java.util.NoSuchElementException;
+import java.util.Iterator;
+
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
@@ -147,5 +150,25 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(f.getY(0), g.getY(0), 0.001);
         assertEquals(f.getY(1), g.getY(1), 0.001);
         assertEquals(f.getY(2), g.getY(2), 0.001);
+    }
+    @Test
+    public void testIteratorCycleWhile() {
+        Iterator<Point> iterator = getDefinedThroughArrays().iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(getDefinedThroughArrays().getX(i), point.x, DELTA);
+            assertEquals(getDefinedThroughArrays().getY(i++), point.y, DELTA);
+        }
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    public void testIteratorCycleForEach() {
+        int i = 0;
+        for (Point point : getDefinedThroughArrays()) {
+            assertEquals(getDefinedThroughArrays().getX(i), point.x, DELTA);
+            assertEquals(getDefinedThroughArrays().getY(i++), point.y, DELTA);
+        }
     }
 }
