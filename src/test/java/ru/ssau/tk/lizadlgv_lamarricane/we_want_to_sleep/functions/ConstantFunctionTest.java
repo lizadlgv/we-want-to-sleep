@@ -1,8 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
-import static org.testng.Assert.*;
-
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 public class ConstantFunctionTest {
     private final ConstantFunction testFunction = new ConstantFunction(7);

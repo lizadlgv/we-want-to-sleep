@@ -11,19 +11,16 @@ public class UnmodifiableTabulatedFunction implements TabulatedFunction {
 
     @Override
     public int getCount() {
-
         return function.getCount();
     }
 
     @Override
     public double getX(int index) {
-
         return function.getX(index);
     }
 
     @Override
     public double getY(int index) {
-
         return function.getY(index);
     }
 
@@ -34,13 +31,11 @@ public class UnmodifiableTabulatedFunction implements TabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-
         return function.indexOfX(x);
     }
 
     @Override
     public int indexOfY(double y) {
-
         return function.indexOfY(y);
     }
 
@@ -51,13 +46,11 @@ public class UnmodifiableTabulatedFunction implements TabulatedFunction {
 
     @Override
     public double rightBound() {
-
         return function.rightBound();
     }
 
     @Override
     public Iterator<Point> iterator() {
-
         return function.iterator();
     }
 

@@ -1,11 +1,9 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
-
 import org.testng.asserts.SoftAssert;
 
 public class MathFunctionTest {
-
     private final MathFunction identity = new IdentityFunction();
     private final MathFunction root = new FourthRootFunction();
     private final MathFunction constant = new ConstantFunction(3);

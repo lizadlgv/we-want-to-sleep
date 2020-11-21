@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class StrictTabulatedFunctionTest {
-
     private final static double DELTA = 0.0001;
 
     TabulatedFunction array = new StrictTabulatedFunction(
@@ -15,7 +14,6 @@ public class StrictTabulatedFunctionTest {
             new LinkedListTabulatedFunction(new double[]{1., 2., 3., 4.}, new double[]{1., 4., 9., 16}));
 
     TabulatedFunction strictInUnmodifiable = new UnmodifiableTabulatedFunction(array);
-
 
     @Test
     public void testGetCount() {

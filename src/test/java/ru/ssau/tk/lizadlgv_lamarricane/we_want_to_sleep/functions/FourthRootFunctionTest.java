@@ -13,6 +13,5 @@ public class FourthRootFunctionTest {
         assertEquals(testFourthRoot.apply(16), 2, DELTA);
         assertEquals(testFourthRoot.apply(0.2), 0.6687, DELTA);
         assertEquals(testFourthRoot.apply(507), 4.7451, DELTA);
-
     }
 }

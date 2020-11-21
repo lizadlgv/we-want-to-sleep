@@ -1,11 +1,12 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
-
     private final double[] xValues;
     private final double[] yValues;
 
@@ -115,6 +116,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+        if (x < xValues[floorIndex] || xValues[floorIndex + 1] < x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 

@@ -1,15 +1,14 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
-
 import org.testng.asserts.SoftAssert;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
 import java.util.Iterator;
 
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
-
     private final static double DELTA = 0.0001;
 
     private final double[] valuesX = new double[]{0., 1., 2., 3., 4.};
@@ -129,9 +128,12 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testInterpolate() {
         softAssert.assertEquals(sampleFunction().interpolate(2., 2), 4., DELTA);
-        softAssert.assertEquals(sampleSqr().interpolate(2.5, 4), 10., DELTA);
+        softAssert.assertEquals(sampleSqr().interpolate(2.5, 2), 6.5, DELTA);
         softAssert.assertEquals(sampleFunction().interpolate(0, 0), 0., DELTA);
-        softAssert.assertEquals(sampleSqr().interpolate(4., 2), 14., DELTA);
+        assertThrows(InterpolationException.class, () ->
+                sampleFunction().interpolate(4., 4));
+        assertThrows(InterpolationException.class, () ->
+                sampleFunction().interpolate(2., 0));
         softAssert.assertAll();
     }
 
