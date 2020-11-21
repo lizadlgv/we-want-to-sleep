@@ -5,12 +5,16 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class UnmodifiableTabulatedFunctionTest {
+
     private final static double DELTA = 0.0001;
 
     TabulatedFunction array = new UnmodifiableTabulatedFunction(
             new ArrayTabulatedFunction(new double[]{-1., 6., 9.}, new double[]{-1., 3., 10.}));
+
     TabulatedFunction list = new UnmodifiableTabulatedFunction(
             new LinkedListTabulatedFunction(new double[]{-1., 6., 9., 13.}, new double[]{-1., 3., 10., 11}));
+
+    TabulatedFunction unmodifiableInStrict = new StrictTabulatedFunction(array);
 
     @Test
     public void testGetCount() {
@@ -32,8 +36,15 @@ public class UnmodifiableTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        assertThrows(UnsupportedOperationException.class, () -> array.setY(0, 2.));
-        assertThrows(UnsupportedOperationException.class, () -> list.setY(3, 1.));
+        TabulatedFunction array = new UnmodifiableTabulatedFunction(
+                new ArrayTabulatedFunction(new double[]{-1., 6., 9.}, new double[]{-1., 3., 10.}));
+        TabulatedFunction list = new UnmodifiableTabulatedFunction(
+                new LinkedListTabulatedFunction(new double[]{-1., 6., 9., 13.}, new double[]{-1., 3., 10., 11}));
+        array.setY(0, 2.);
+        list.setY(3, 1.);
+        assertEquals(array.getY(0), 2., DELTA);
+        assertEquals(list.getY(3), 1., DELTA);
+        assertThrows(UnsupportedOperationException.class, () -> unmodifiableInStrict.setY(1, 2.5));
     }
 
     @Test
