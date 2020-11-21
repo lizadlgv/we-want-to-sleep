@@ -6,4 +6,3 @@ public class DivisionFunction implements MathFunction {
         return x / 2.0;
     }
 }
-

@@ -151,6 +151,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(f.getY(1), g.getY(1), 0.001);
         assertEquals(f.getY(2), g.getY(2), 0.001);
     }
+
     @Test
     public void testIteratorCycleWhile() {
         Iterator<Point> iterator = getDefinedThroughArrays().iterator();
