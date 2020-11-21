@@ -15,6 +15,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Size of list is less than minimum (2)");
         }
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count); //копия массива в поле
         this.yValues = Arrays.copyOf(yValues, count);
