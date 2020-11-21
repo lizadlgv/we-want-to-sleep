@@ -34,12 +34,10 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
         return super.interpolate(x, x0, x1, y0, y1);
     }
 
-
     public double apply(double x) {
         return super.apply(x);
 
     }
-
 
     protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         return super.interpolate(x, leftX, rightX, leftY, rightY);
