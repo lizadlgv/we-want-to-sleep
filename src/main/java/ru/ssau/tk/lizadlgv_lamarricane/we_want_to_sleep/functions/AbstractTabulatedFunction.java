@@ -1,5 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
+
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected abstract int floorIndexOfX(double x);
 
@@ -26,6 +29,19 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
             return getY(indexOfX(x));
         } else {
             return interpolate(x, floorIndexOfX(x));
+        }
+    }
+    static protected void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length) {
+            throw new DifferentLengthOfArraysException("Lengths of arrays are different");
+        }
+    }
+
+    static protected void checkSorted(double[] xValues) {
+        for (int i = 0; i < xValues.length - 1; i++) {
+            if (xValues[i] >= xValues[i + 1]) {
+                throw new ArrayIsNotSortedException("xValues array isn't sorted");
+            }
         }
     }
 }
