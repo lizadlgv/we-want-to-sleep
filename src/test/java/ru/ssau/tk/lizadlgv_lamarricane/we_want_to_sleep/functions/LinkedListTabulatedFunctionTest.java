@@ -1,7 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
-
 import org.testng.asserts.SoftAssert;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
@@ -10,7 +9,6 @@ import java.util.Iterator;
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
-
     private final static double DELTA = 0.0001;
 
     private final double[] valuesX = new double[]{0., 1., 2., 3., 4.};

@@ -3,8 +3,8 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 import org.testng.annotations.Test;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
-import java.util.NoSuchElementException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 

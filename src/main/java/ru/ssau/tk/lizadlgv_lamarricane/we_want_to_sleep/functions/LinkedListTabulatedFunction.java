@@ -15,25 +15,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         public double y;
     }
 
-    public void addNode(double x, double y) {
-        Node newNode = new Node();
-        newNode.x = x;
-        newNode.y = y;
-        if (head == null) {
-            count = 0;
-            head = newNode;
-            newNode.prev = newNode;
-            newNode.next = newNode;
-        } else {
-            Node last = head.prev;
-            newNode.prev = last;
-            newNode.next = head;
-            last.next = newNode;
-        }
-        head.prev = newNode;
-        count++;
-    }
-
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Size of list is less than minimum (2)");
@@ -59,6 +40,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 xFrom += step;
             }
         }
+    }
+
+    public void addNode(double x, double y) {
+        Node newNode = new Node();
+        newNode.x = x;
+        newNode.y = y;
+        if (head == null) {
+            count = 0;
+            head = newNode;
+            newNode.prev = newNode;
+            newNode.next = newNode;
+        } else {
+            Node last = head.prev;
+            newNode.prev = last;
+            newNode.next = head;
+            last.next = newNode;
+        }
+        head.prev = newNode;
+        count++;
     }
 
     private Node getNode(int index) {
@@ -109,16 +109,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double leftBound() {
-        return head.x;
-    }
-
-    @Override
-    public double rightBound() {
-        return head.prev.x;
-    }
-
-    @Override
     public double getX(int index) {
         return getNode(index).x;
     }
@@ -131,6 +121,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public void setY(int index, double value) {
         getNode(index).y = value;
+    }
+
+    @Override
+    public double leftBound() {
+        return head.x;
+    }
+
+    @Override
+    public double rightBound() {
+        return head.prev.x;
     }
 
     @Override
@@ -209,11 +209,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public double apply(double x) {
         if (x < leftBound()) {
             return extrapolateLeft(x);
-        }
-        if (x > rightBound()) {
+        } else if (x > rightBound()) {
             return extrapolateRight(x);
-        }
-        if (indexOfX(x) != -1) {
+        } else if (indexOfX(x) != -1) {
             return getY(indexOfX(x));
         } else {
             return interpolate(x, floorNodeOfX(x));

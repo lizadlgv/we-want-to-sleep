@@ -1,7 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
-
 import org.testng.asserts.SoftAssert;
 
 public class CompositeFunctionTest {
