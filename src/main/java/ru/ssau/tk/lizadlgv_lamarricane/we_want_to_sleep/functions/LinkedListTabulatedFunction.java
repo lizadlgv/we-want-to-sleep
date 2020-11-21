@@ -1,5 +1,7 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -189,11 +191,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         Node left = getNode(floorIndex);
         Node right = left.next;
+        if (x < left.x || right.x < x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         return interpolate(x, left.x, right.x, left.y, right.y);
     }
 
     protected double interpolate(double x, Node floorNode) {
         Node right = floorNode.next;
+        if (x < floorNode.x || right.x < x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         return interpolate(x, floorNode.x, right.x, floorNode.y, right.y);
     }
 

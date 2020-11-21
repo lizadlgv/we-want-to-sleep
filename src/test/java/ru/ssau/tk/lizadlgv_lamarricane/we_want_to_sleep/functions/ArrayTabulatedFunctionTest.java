@@ -1,6 +1,7 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
 import java.util.NoSuchElementException;
 import java.util.Iterator;
@@ -48,6 +49,10 @@ public class ArrayTabulatedFunctionTest {
     public void testInterpolate() {
         assertEquals(getDefinedThroughArrays().interpolate(0.666, getDefinedThroughArrays().floorIndexOfX(0.666)), 0.666, DELTA);
         assertEquals(getDefinedThroughMathFunction().interpolate(7.25, getDefinedThroughMathFunction().floorIndexOfX(7.25)), 52.5625, DELTA);
+        assertThrows(InterpolationException.class, () ->
+                getDefinedThroughArrays().interpolate(1.5, 2));
+        assertThrows(InterpolationException.class, () ->
+                getDefinedThroughMathFunction().interpolate(-4., 0));
     }
 
     @Test
