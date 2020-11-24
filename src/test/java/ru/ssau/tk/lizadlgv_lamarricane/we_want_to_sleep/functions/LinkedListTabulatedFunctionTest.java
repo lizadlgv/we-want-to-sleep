@@ -2,11 +2,14 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertThrows;
 
 public class LinkedListTabulatedFunctionTest {
     private final static double DELTA = 0.0001;
@@ -25,6 +28,25 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     SoftAssert softAssert = new SoftAssert();
+
+    @Test
+    public void testConstructorException() {
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(new double[6], new double[1]));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(new double[1], new double[2]));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(new double[]{6.}, new double[]{}));
+
+        assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(new double[6], new double[3]));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(new double[7], new double[9]));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(new double[]{10., 11., 2.}, new double[]{9., 1.}));
+
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(new double[]{2., -1., 0}, new double[]{3., 4., 5.}));
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(new double[]{30., -50., 90., 100.}, new double[]{1., 10., 20., 30.}));
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(new double[]{1., 2., 4., 3.}, new double[]{1., 2., 3., 4.}));
+
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 1., 5., 1));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 4., 3., 2));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 5., 5., 10));
+    }
 
     @Test
     public void testGetCount() {
@@ -190,10 +212,13 @@ public class LinkedListTabulatedFunctionTest {
             softAssert.assertEquals(testSample.getX(i), point.x, DELTA);
             softAssert.assertEquals(testSample.getY(i++), point.y, DELTA);
         }
+        softAssert.assertEquals(i, 5);
         for (Point point : testSample) {
             softAssert.assertEquals(testSample.getX(j), point.x, DELTA);
             softAssert.assertEquals(testSample.getY(j++), point.y, DELTA);
         }
+        softAssert.assertEquals(j, 5);
+        assertThrows(NoSuchElementException.class, iterator::next);
         softAssert.assertAll();
     }
 }
