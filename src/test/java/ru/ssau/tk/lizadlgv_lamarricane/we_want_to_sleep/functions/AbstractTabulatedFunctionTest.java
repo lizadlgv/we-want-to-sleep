@@ -29,10 +29,10 @@ public class AbstractTabulatedFunctionTest {
     @Test
     public void testCheckLengthIsTheSame() {
         assertThrows(DifferentLengthOfArraysException.class, () -> AbstractTabulatedFunction.checkLengthIsTheSame(valuesX1, valuesY1));
-            double[] valuesX = new double[]{-1, 5};
-            double[] valuesY = new double[]{9, 2};
-            AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
-        }
+        double[] valuesX = new double[]{-1, 5};
+        double[] valuesY = new double[]{9, 2};
+        AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
+    }
 
     @Test
     public void testCheckSorted() {

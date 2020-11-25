@@ -21,7 +21,10 @@ public class ArrayTabulatedFunctionTest {
     private ArrayTabulatedFunction getDefinedThroughMathFunction() {
         return new ArrayTabulatedFunction(sqrFunc, 0, 9, 109);
     }
-    private AbstractTabulatedFunction getUnitArray() { return new ArrayTabulatedFunction(sqrFunc, 6, 6, 1); }
+
+    private AbstractTabulatedFunction getUnitArray() {
+        return new ArrayTabulatedFunction(sqrFunc, 6, 6, 1);
+    }
 
     @Test
     public void testIllegalArgumentException() {
@@ -175,7 +178,7 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(getDefinedThroughArrays().getX(i), point.x, DELTA);
             assertEquals(getDefinedThroughArrays().getY(i++), point.y, DELTA);
         }
-        assertEquals (i, 9 );
+        assertEquals(i, 9);
         assertThrows(NoSuchElementException.class, iterator::next);
     }
 
@@ -186,6 +189,6 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(getDefinedThroughArrays().getX(i), point.x, DELTA);
             assertEquals(getDefinedThroughArrays().getY(i++), point.y, DELTA);
         }
-        assertEquals (i, 9 );
+        assertEquals(i, 9);
     }
 }
