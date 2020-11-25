@@ -8,6 +8,8 @@ import static org.testng.Assert.*;
 
 public class AbstractTabulatedFunctionTest {
     private final static double DELTA = 0.0001;
+    private final double[] valuesX1 = new double[]{-15, -3, -1, 0, 1, 3, 15};
+    private final double[] valuesY1 = new double[]{-5, -2, -1, -0, 1, 2};
 
     public MockTabulatedFunction mockFunction = new MockTabulatedFunction();
 
@@ -26,12 +28,11 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testCheckLengthIsTheSame() {
-        assertThrows(DifferentLengthOfArraysException.class, () -> {
-            double[] valuesX = new double[]{-3, 5};
-            double[] valuesY = new double[]{9};
+        assertThrows(DifferentLengthOfArraysException.class, () -> AbstractTabulatedFunction.checkLengthIsTheSame(valuesX1, valuesY1));
+            double[] valuesX = new double[]{-1, 5};
+            double[] valuesY = new double[]{9, 2};
             AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
-        });
-    }
+        }
 
     @Test
     public void testCheckSorted() {
@@ -39,5 +40,6 @@ public class AbstractTabulatedFunctionTest {
             double[] valuesX = new double[]{-3, 5, 7, 9, 0};
             AbstractTabulatedFunction.checkSorted(valuesX);
         });
+        AbstractTabulatedFunction.checkSorted(valuesX1);
     }
 }
