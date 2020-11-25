@@ -1,6 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
 import java.util.Iterator;
@@ -22,17 +24,26 @@ public class ArrayTabulatedFunctionTest {
         return new ArrayTabulatedFunction(sqrFunc, 0, 9, 109);
     }
 
-    private AbstractTabulatedFunction getUnitArray() {
-        return new ArrayTabulatedFunction(sqrFunc, 6, 6, 1);
+    @Test
+    public void testConstructorException() {
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[6], new double[1]));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[1], new double[2]));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{6.}, new double[]{}));
+
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[6], new double[3]));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[7], new double[9]));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[]{10., 11., 2.}, new double[]{9., 1.}));
+
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(new double[]{2., -1., 0}, new double[]{3., 4., 5.}));
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(new double[]{30., -50., 90., 100.}, new double[]{1., 10., 20., 30.}));
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(new double[]{1., 2., 4., 3.}, new double[]{1., 2., 3., 4.}));
+
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqrFunc, 1., 5., 1));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqrFunc, 4., 3., 2));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqrFunc, 5., 5., 10));
     }
 
-    @Test
-    public void testIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> getUnitArray().floorIndexOfX(0));
-        assertThrows(IllegalArgumentException.class, () -> getUnitArray().extrapolateLeft(1));
-        assertThrows(IllegalArgumentException.class, () -> getUnitArray().extrapolateLeft(5));
-        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{1}, new double[]{1}));
-    }
+
 
     @Test
     public void testFloorIndexOfX() {
