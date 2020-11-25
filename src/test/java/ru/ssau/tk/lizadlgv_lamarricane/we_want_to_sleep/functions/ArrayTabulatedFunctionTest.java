@@ -43,8 +43,6 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqrFunc, 5., 5., 10));
     }
 
-
-
     @Test
     public void testFloorIndexOfX() {
         assertEquals(getDefinedThroughArrays().floorIndexOfX(13), 9, DELTA);
