@@ -32,4 +32,10 @@ public class ArrayTabulatedFunctionFactoryTest {
         assertTrue(function instanceof UnmodifiableTabulatedFunction);
         assertThrows(UnsupportedOperationException.class, () -> function.apply(0));
     }
+
+    @Test
+    public void createUnmodifiable() {
+        TabulatedFunction function = array.createStrict(xValues, yValues);
+        assertTrue(function instanceof StrictTabulatedFunction);
+    }
 }

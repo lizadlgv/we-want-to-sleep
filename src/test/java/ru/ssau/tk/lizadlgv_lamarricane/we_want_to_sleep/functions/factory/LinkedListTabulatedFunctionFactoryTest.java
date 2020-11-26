@@ -32,4 +32,10 @@ public class LinkedListTabulatedFunctionFactoryTest {
         assertTrue(function instanceof UnmodifiableTabulatedFunction);
         assertThrows(UnsupportedOperationException.class, () -> function.apply(0));
     }
+
+    @Test
+    public void createUnmodifiable() {
+        TabulatedFunction function = linkedList.createStrict(xValues, yValues);
+        assertTrue(function instanceof StrictTabulatedFunction);
+    }
 }
