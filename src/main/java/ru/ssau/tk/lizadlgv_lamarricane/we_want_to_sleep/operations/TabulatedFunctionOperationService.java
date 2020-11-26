@@ -7,15 +7,14 @@ import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayT
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedFunctionOperationService {
-
     private TabulatedFunctionFactory factory;
-
-    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
-        this.factory = factory;
-    }
 
     public TabulatedFunctionOperationService() {
         factory = new ArrayTabulatedFunctionFactory();
+    }
+
+    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
+        this.factory = factory;
     }
 
     public TabulatedFunctionFactory getFactory() {
@@ -34,12 +33,14 @@ public class TabulatedFunctionOperationService {
         }
         return points;
     }
+
     private interface BiOperation {
         double apply(double u, double v);
     }
+
     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
         if (a.getCount() != b.getCount()) {
-            throw new InconsistentFunctionsException("Количество записей в первой табулированной функции не совпадает с количеством записей во второй");
+            throw new InconsistentFunctionsException("The number of points in the first tabulated function does not match the number of records in the second");
         }
         Point[] aPoints = asPoints(a);
         Point[] bPoints = asPoints(b);
@@ -48,7 +49,7 @@ public class TabulatedFunctionOperationService {
 
         for (int i = 0; i < a.getCount(); i++) {
             if (aPoints[i].x != bPoints[i].x) {
-                throw new InconsistentFunctionsException("Координаты x двух функций не совпадают.");
+                throw new InconsistentFunctionsException("The x coordinates of the two functions do not match");
             }
             xValues[i] = aPoints[i].x;
             yValues[i] = operation.apply(aPoints[i].y, bPoints[i].y);
@@ -62,5 +63,13 @@ public class TabulatedFunctionOperationService {
 
     public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (u, v) -> u - v);
+    }
+
+    public TabulatedFunction multiply(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u * v);
+    }
+
+    public TabulatedFunction divide(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (u, v) -> u / v);
     }
 }
