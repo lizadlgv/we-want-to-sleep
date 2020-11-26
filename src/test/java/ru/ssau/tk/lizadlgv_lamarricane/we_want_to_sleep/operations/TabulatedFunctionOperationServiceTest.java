@@ -30,10 +30,13 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     public void testSetFactory() {
-        operationServiceArray.setFactory(new LinkedListTabulatedFunctionFactory());
-        operationServiceList.setFactory(new ArrayTabulatedFunctionFactory());
-        assertTrue(operationServiceArray.getFactory() instanceof LinkedListTabulatedFunctionFactory);
-        assertTrue(operationServiceList.getFactory() instanceof ArrayTabulatedFunctionFactory);
+        TabulatedFunctionOperationService operationServiceArraySet = new TabulatedFunctionOperationService();
+        TabulatedFunctionOperationService operationServiceListSet = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
+
+        operationServiceArraySet.setFactory(new LinkedListTabulatedFunctionFactory());
+        operationServiceListSet.setFactory(new ArrayTabulatedFunctionFactory());
+        assertTrue(operationServiceArraySet.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        assertTrue(operationServiceListSet.getFactory() instanceof ArrayTabulatedFunctionFactory);
     }
 
     @Test
