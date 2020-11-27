@@ -11,7 +11,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length < 2  || yValues.length < 2) {
+        if (xValues.length < 2 || yValues.length < 2) {
             throw new IllegalArgumentException("Size of list is less than minimum (2)");
         }
         checkLengthIsTheSame(xValues, yValues);
@@ -19,7 +19,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
-
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {

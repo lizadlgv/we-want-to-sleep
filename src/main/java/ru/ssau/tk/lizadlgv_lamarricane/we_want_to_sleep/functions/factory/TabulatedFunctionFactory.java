@@ -4,7 +4,7 @@ import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.StrictTabulate
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.UnmodifiableTabulatedFunction;
 
-public interface TabulatedFunctionFactory<createUnmodifiable> {
+public interface TabulatedFunctionFactory {
     TabulatedFunction create(double[] xValues, double[] yValues);
 
     default TabulatedFunction createStrict(double[] xValues, double[] yValues) {

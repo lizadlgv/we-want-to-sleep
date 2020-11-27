@@ -2,7 +2,8 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
 
 public class UnmodifiableTabulatedFunctionTest {
     private final static double DELTA = 0.0001;

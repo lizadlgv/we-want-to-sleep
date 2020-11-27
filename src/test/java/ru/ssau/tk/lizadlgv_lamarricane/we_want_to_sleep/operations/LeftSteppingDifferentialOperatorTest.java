@@ -1,10 +1,9 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.operations;
 
 import org.testng.annotations.Test;
-
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.SqrFunction;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class LeftSteppingDifferentialOperatorTest {
     private final static double DELTA = 0.000001;
