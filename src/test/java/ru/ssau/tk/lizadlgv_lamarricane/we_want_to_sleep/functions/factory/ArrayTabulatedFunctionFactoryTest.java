@@ -27,15 +27,15 @@ public class ArrayTabulatedFunctionFactoryTest {
     }
 
     @Test
-    public void testCreateStrictUnmodifiable() {
-        TabulatedFunction function = array.createStrictUnmodifiable(xValues, yValues);
+    public void createUnmodifiable() {
+        TabulatedFunction function = array.createUnmodifiable(xValues, yValues);
         assertTrue(function instanceof UnmodifiableTabulatedFunction);
-        assertThrows(UnsupportedOperationException.class, () -> function.apply(0));
     }
 
     @Test
-    public void createUnmodifiable() {
-        TabulatedFunction function = array.createStrict(xValues, yValues);
-        assertTrue(function instanceof StrictTabulatedFunction);
+    public void testCreateStrictUnmodifiable() {
+        TabulatedFunction function = array.createStrictUnmodifiable(xValues, yValues);
+        assertThrows(UnsupportedOperationException.class, () -> function.setY(0, 0));
+        assertThrows(UnsupportedOperationException.class, () -> function.apply(0));
     }
 }

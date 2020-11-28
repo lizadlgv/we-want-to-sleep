@@ -3,7 +3,7 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 import java.util.Iterator;
 
 public class StrictTabulatedFunction implements TabulatedFunction {
-    TabulatedFunction function;
+    private final TabulatedFunction function;
 
     public StrictTabulatedFunction(TabulatedFunction function) {
         this.function = function;
