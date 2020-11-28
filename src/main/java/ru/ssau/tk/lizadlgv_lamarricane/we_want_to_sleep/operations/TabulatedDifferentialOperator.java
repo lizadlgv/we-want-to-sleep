@@ -6,7 +6,7 @@ import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayT
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
-    TabulatedFunctionFactory factory;
+    private TabulatedFunctionFactory factory;
 
     public TabulatedDifferentialOperator() {
         this.factory = new ArrayTabulatedFunctionFactory();
