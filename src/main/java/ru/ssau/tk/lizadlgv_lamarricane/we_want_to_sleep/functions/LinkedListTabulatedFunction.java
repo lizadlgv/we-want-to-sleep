@@ -1,14 +1,18 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import org.jetbrains.annotations.NotNull;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    private static final long serialVersionUID = 1242481747488848027L;
     private Node head;
 
-    private static class Node {
+    private static class Node implements Serializable {
+        private static final long serialVersionUID = -915459550670427647L;
         public Node next;
         public Node prev;
         public double x;
@@ -219,6 +223,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
+    @NotNull
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
             private Node node = head;
