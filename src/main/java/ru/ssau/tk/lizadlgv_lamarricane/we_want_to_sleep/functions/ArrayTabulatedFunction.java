@@ -2,11 +2,13 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implements Serializable {
+    private static final long serialVersionUID = 925973407340487180L;
     private final double[] xValues;
     private final double[] yValues;
 
