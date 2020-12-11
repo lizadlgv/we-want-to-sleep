@@ -13,7 +13,7 @@ public final class FunctionsIO {
         throw new UnsupportedOperationException();
     }
 
-    public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) throws IOException {
+    public static   void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) throws IOException {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
         for (Point point : function) {
