@@ -44,7 +44,7 @@ public class AbstractTabulatedFunctionTest {
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
         double[] xValues = {0.0, 0.5, 1.0};
         double[] yValues = {0.0, 0.25, 1.0};
         ArrayTabulatedFunction arrayFunc = new ArrayTabulatedFunction(xValues, yValues);
