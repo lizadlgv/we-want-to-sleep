@@ -1,11 +1,10 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.concurrent;
 
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.operations.*;
 
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.NoSuchElementException;
+
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
     private final TabulatedFunction tabulatedFunction;
