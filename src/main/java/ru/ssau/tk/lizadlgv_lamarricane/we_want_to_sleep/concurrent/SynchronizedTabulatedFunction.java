@@ -1,10 +1,12 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.concurrent;
 
+import org.jetbrains.annotations.NotNull;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.operations.TabulatedFunctionOperationService;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
-
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
     private final TabulatedFunction tabulatedFunction;
@@ -88,9 +90,28 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
         }
     }
 
+    @NotNull
     @Override
-    public Iterator<Point> iterator() {  //нужно переписать
-        return null;
+    public Iterator<Point> iterator() {
+        synchronized (tabulatedFunction) {
+            Point[] points = TabulatedFunctionOperationService.asPoints(tabulatedFunction);
+            return new Iterator<Point>() {
+                int i = 0;
+
+                @Override
+                public boolean hasNext() {
+                    return i != points.length;
+                }
+
+                @Override
+                public Point next() {
+                    if (!hasNext()) {
+                        throw new NoSuchElementException();
+                    } else {
+                        return new Point(points[i].x, points[i++].y);
+                    }
+                }
+            };
+        }
     }
 }
-
