@@ -1,6 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.concurrent;
 
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
 
 public class AddingTask implements Runnable {
     private final TabulatedFunction tabulatedFunction;
