@@ -1,9 +1,8 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.operations;
 
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.Point;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.concurrent.SynchronizedTabulatedFunction;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.*;
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
     private TabulatedFunctionFactory factory;
@@ -37,5 +36,15 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         }
         yValues[points.length - 1] = yValues[points.length - 2];
         return factory.create(xValues, yValues);
+    }
+
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        Object mu = new Object();
+
+        if (function instanceof SynchronizedTabulatedFunction) {
+            return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
+        }
+        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function, mu);
+        return syncFunc.doSynchronously(this::derive);
     }
 }
