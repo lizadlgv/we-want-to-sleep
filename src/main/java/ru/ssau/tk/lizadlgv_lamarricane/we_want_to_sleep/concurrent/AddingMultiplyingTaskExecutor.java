@@ -21,7 +21,6 @@ public class AddingMultiplyingTaskExecutor {
         thread3.start();
 
         countDownLatch.await();
-
         System.out.println(function.toString());
     }
 }

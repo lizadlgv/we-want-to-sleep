@@ -4,9 +4,15 @@ import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunct
 
 public class ReadWriteTask implements Runnable {
     private final TabulatedFunction tabulatedFunction;
+    private Runnable postRunAction;
 
     public ReadWriteTask(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
+    }
+
+    public ReadWriteTask(TabulatedFunction tabulatedFunction, Runnable postRunAction) {
+        this.tabulatedFunction = tabulatedFunction;
+        this.postRunAction = postRunAction;
     }
 
     @Override
@@ -24,5 +30,6 @@ public class ReadWriteTask implements Runnable {
             System.out.printf(" %s, after write: i = %d, x = %f, y = %f ", Thread.currentThread().getName(), i, x, y);
             System.out.println();
         }
+        postRunAction.run();
     }
 }
