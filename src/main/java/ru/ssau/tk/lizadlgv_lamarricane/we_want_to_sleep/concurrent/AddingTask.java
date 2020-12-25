@@ -1,16 +1,16 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.concurrent;
 
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
 
-public class MultiplyingTask implements Runnable {
+public class AddingTask implements Runnable {
     private final TabulatedFunction tabulatedFunction;
     private Runnable postRunAction;
 
-    public MultiplyingTask(TabulatedFunction func) {
+    public AddingTask(TabulatedFunction func) {
         this.tabulatedFunction = func;
     }
 
-    public MultiplyingTask(TabulatedFunction func, Runnable postRunAction) {
+    public AddingTask(TabulatedFunction func, Runnable postRunAction) {
         this.tabulatedFunction = func;
         this.postRunAction = postRunAction;
     }
@@ -24,7 +24,7 @@ public class MultiplyingTask implements Runnable {
             synchronized (tabulatedFunction) {
                 y = tabulatedFunction.getY(i);
                 System.out.printf("%s, i = %d, x = %f, old y = %f \n", Thread.currentThread().getName(), i, x, y);
-                tabulatedFunction.setY(i, y * 10);
+                tabulatedFunction.setY(i, y + 3);
                 y = tabulatedFunction.getY(i);
             }
             System.out.printf("%s, i = %d, x = %f, new y = %f \n", Thread.currentThread().getName(), i, x, y);
