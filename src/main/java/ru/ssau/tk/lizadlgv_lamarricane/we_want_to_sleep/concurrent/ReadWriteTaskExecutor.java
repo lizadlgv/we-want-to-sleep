@@ -13,10 +13,10 @@ public class ReadWriteTaskExecutor {
         TabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(new ZeroFunction(), 1, 10, 10);
         List<Thread> list = new ArrayList<>();
 
-        CountDownLatch countDownLatch = new CountDownLatch(3);
+        CountDownLatch countDownLatch = new CountDownLatch(20);
 
         for (int i = 0; i < 20; i++) {
-            Thread thread = new Thread(new ReadWriteTask(tabulatedFunction));
+            Thread thread = new Thread(new ReadWriteTask(tabulatedFunction, countDownLatch::countDown));
             list.add(thread);
         }
         for (Thread thread : list) {
