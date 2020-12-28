@@ -22,23 +22,16 @@ public class TableWindow extends JDialog {
     private final JButton inputButton = new JButton("Ввести");
     private final JButton createButton = new JButton("Создать");
     private TabulatedFunction function;
-    private final TabulatedFunctionFactory factory;
 
-    public TableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+    public TableWindow(TabulatedFunctionFactory kfactory, Consumer<? super TabulatedFunction> callback) {
         super();
         setModal(true);
         setLocationRelativeTo(null);
         getContentPane().setLayout(new FlowLayout());
         this.setBounds(300, 300, 500, 500);
-        this.factory = factory;
         addButtonListeners(callback);
         compose();
         setLocationRelativeTo(null);
-    }
-
-    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
-        TableWindow app = new TableWindow(factory, callback);
-        app.setVisible(true);
     }
 
     void compose() {
@@ -105,80 +98,16 @@ public class TableWindow extends JDialog {
         });
     }
 
-//    public void addListenerForInputButton() {
-//        inputButton.addActionListener(event -> {
-//            try {
-//                createButton.setEnabled(false);
-//                int count = Integer.parseInt(countField.getText());
-//                clearTable(tableModel.getRowCount());
-//                for (int i = 0; i < count; i++) {
-//                    xValues.add(0.);
-//                    yValues.add(0.);
-//                    tableModel.fireTableDataChanged();
-//                }
-//                if (tableModel.getRowCount() > 0) {
-//                    createButton.setEnabled(true);
-//                } else {
-//                    new ErrorWindow(this, new DifferentLengthOfArraysException());
-//                }
-//            } catch (Exception e) {
-//                new ErrorWindow(this, e);
-//            }
-//        });
-//    }
-//
-//    public void addListenerForCreateButton() {
-//        createButton.addActionListener(event -> {
-//            try {
-//                double[] x = new double[xValues.size()];
-//                double[] y = new double[xValues.size()];
-//                x[0] = xValues.get(0);
-//                y[0] = yValues.get(0);
-//                for (int i = 1; i < xValues.size(); i++) {
-//                    if (xValues.get(i - 1) > xValues.get(i)) {
-//                        throw new ArrayIsNotSortedException();
-//                    }
-//                    x[i] = xValues.get(i);
-//                    y[i] = yValues.get(i);
-//                }
-//                function = new ArrayTabulatedFunctionFactory().create(x, y);
-//                System.out.println(function.toString());
-//                setVisible(true);
-//                dispose();
-//            } catch (Exception e) {
-//                new ErrorWindow(this, e);
-//            }
-//        });
-//    }
-//
-//    public void addListenerForCountButton() {
-//        countField.getDocument().addDocumentListener(new DocumentListener() {
-//            @Override
-//            public void insertUpdate(DocumentEvent e) {
-//                onChanged();
-//            }
-//
-//            @Override
-//            public void removeUpdate(DocumentEvent e) {
-//                onChanged();
-//            }
-//
-//            @Override
-//            public void changedUpdate(DocumentEvent e) {
-//                onChanged();
-//            }
-//
-//            private void onChanged() {
-//                inputButton.setEnabled(!countField.getText().isEmpty());
-//            }
-//        });
-//    }
-
     public void clearTable(int n) {
         for (int i = 0; i < n; i++) {
             xValues.remove(n - i - 1);
             yValues.remove(n - i - 1);
             tableModel.fireTableDataChanged();
         }
+    }
+
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+        TableWindow app = new TableWindow(factory, callback);
+        app.setVisible(true);
     }
 }
