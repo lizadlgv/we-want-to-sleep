@@ -50,11 +50,6 @@ public class MathFuncWindow extends JDialog {
         setVisible(true);
     }
 
-    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
-        MathFuncWindow app = new MathFuncWindow(factory, callback);
-        app.setVisible(true);
-    }
-
     private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
         buttonCreateFunction.addActionListener(evt -> {
             try {
@@ -64,7 +59,6 @@ public class MathFuncWindow extends JDialog {
                 double xTo = Double.parseDouble(toField.getText());
                 int count = Integer.parseInt(countField.getText());
                 function = MathFuncWindow.factory.create(selectedFunction, xFrom, xTo, count);
-
                 callback.accept(function);
                 setVisible(true);
                 dispose();
@@ -119,5 +113,10 @@ public class MathFuncWindow extends JDialog {
                 .addComponent(functionComboBox)
                 .addComponent(buttonCreateFunction)
         );
+    }
+
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+        MathFuncWindow app = new MathFuncWindow(factory, callback);
+        app.setVisible(true);
     }
 }

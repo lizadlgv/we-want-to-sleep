@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MainWindow extends JFrame {
     private final JButton buttonCreateTFunction = new JButton("Создать табулированную функцию из массивов");
     private final JButton buttonSettings = new JButton("Настройки");
-    private final JButton inputButtonMath = new JButton("Создать табулированную функцию с помощью другой функции");
+    private final JButton buttonCreateMathFunction = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
     private final ArrayList<Double> xValues = new ArrayList<>();
@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(300, 300, 1200, 500);
         getContentPane().add(buttonCreateTFunction);
-        getContentPane().add(inputButtonMath);
+        getContentPane().add(buttonCreateMathFunction);
         getContentPane().add(buttonSettings);
         getContentPane().add(openButton);
         getContentPane().add(saveButton);
@@ -55,7 +55,7 @@ public class MainWindow extends JFrame {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCreateTFunction)
-                        .addComponent(inputButtonMath)
+                        .addComponent(buttonCreateMathFunction)
                         .addComponent(buttonSettings)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -64,7 +64,7 @@ public class MainWindow extends JFrame {
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(buttonCreateTFunction)
-                        .addComponent(inputButtonMath)
+                        .addComponent(buttonCreateMathFunction)
                         .addComponent(buttonSettings)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -88,7 +88,7 @@ public class MainWindow extends JFrame {
                 }
         );
 
-        inputButtonMath.addActionListener(event -> {
+        buttonCreateMathFunction.addActionListener(event -> {
                     try {
                         int countOld = xValues.size();
                         MathFuncWindow.main(factory, tableModel::setFunction);
@@ -102,6 +102,17 @@ public class MainWindow extends JFrame {
                     }
                 }
         );
+
+        buttonSettings.addActionListener(event -> {
+            try {
+                SettingsWindow.main(factory);
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    e.printStackTrace();
+                } else
+                    new ErrorWindow(this, e);
+            }
+        });
 
         openButton.addActionListener(event -> {
             try {
