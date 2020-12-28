@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MainWindow extends JFrame {
     private final JButton buttonCreateTFunction = new JButton("Создать табулированную функцию из массивов");
     private final JButton buttonSettings = new JButton("Настройки");
-    private final JButton inputButtonMath = new JButton("Создать табулироваанную функцию спомощью другой функции");
+    private final JButton inputButtonMath = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
     private final ArrayList<Double> xValues = new ArrayList<>();
