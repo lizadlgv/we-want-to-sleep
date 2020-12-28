@@ -47,7 +47,6 @@ public class MathFuncWindow extends JDialog {
 
         compose();
         addButtonListeners(callback);
-        setVisible(true);
     }
 
     private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
