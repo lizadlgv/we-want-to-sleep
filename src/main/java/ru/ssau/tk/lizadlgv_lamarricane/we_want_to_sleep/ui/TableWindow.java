@@ -23,7 +23,7 @@ public class TableWindow extends JDialog {
     private final JButton createButton = new JButton("Создать");
     private TabulatedFunction function;
 
-    public TableWindow(TabulatedFunctionFactory kfactory, Consumer<? super TabulatedFunction> callback) {
+    public TableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
         setModal(true);
         setLocationRelativeTo(null);

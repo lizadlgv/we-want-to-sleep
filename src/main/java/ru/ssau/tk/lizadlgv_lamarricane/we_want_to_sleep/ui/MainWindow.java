@@ -87,17 +87,22 @@ public class MainWindow extends JFrame {
                     }
                 }
         );
-        inputButtonMath.addActionListener(event -> new MathFuncWindow());
-        buttonSettings.addActionListener(event -> {
-            try {
-                SettingsWindow.main(factory);
-            } catch (Exception e) {
-                if (e instanceof NullPointerException) {
-                    e.printStackTrace();
-                } else
-                    new ErrorWindow(this, e);
-            }
-        });
+
+        inputButtonMath.addActionListener(event -> {
+                    try {
+                        int countOld = xValues.size();
+                        MathFuncWindow.main(factory, tableModel::setFunction);
+                        int countNew = tableModel.getFunction().getCount();
+                        wrapTable(countOld, countNew);
+                    } catch (Exception e) {
+                        if (e instanceof NullPointerException) {
+                            e.printStackTrace();
+                        } else
+                            new ErrorWindow(this, e);
+                    }
+                }
+        );
+
         openButton.addActionListener(event -> {
             try {
                 int countOld = xValues.size();
@@ -111,6 +116,7 @@ public class MainWindow extends JFrame {
                     new ErrorWindow(this, e);
             }
         });
+
         saveButton.addActionListener(event -> {
             try {
                 FileWriter.main(tableModel.getFunction());
