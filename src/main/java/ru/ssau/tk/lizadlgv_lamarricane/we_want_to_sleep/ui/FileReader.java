@@ -13,9 +13,6 @@ import java.io.FileInputStream;
 import java.util.function.Consumer;
 
 public class FileReader extends JDialog {
-    private TabulatedFunction function;
-    private TabulatedFunctionFactory factory;
-
     public FileReader(Consumer<? super TabulatedFunction> callback) {
         setModal(true);
         JFileChooser chooser = new JFileChooser();
@@ -27,17 +24,16 @@ public class FileReader extends JDialog {
         int rVal = chooser.showOpenDialog(FileReader.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
-            factory = new ArrayTabulatedFunctionFactory();
+            TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
             if (file != null) {
                 try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
-                    function = FunctionsIO.readTabulatedFunction(inputStream, factory);
+                    TabulatedFunction function = FunctionsIO.readTabulatedFunction(inputStream, factory);
                     callback.accept(function);
                 } catch (Exception e) {
                     new ErrorWindow(this, e);
                 }
             }
         }
-
     }
 
     public static void main(Consumer<? super TabulatedFunction> callback) {

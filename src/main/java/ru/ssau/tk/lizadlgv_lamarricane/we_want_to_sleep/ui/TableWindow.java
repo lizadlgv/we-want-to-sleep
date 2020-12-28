@@ -4,6 +4,7 @@ import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSor
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -12,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class TableWindow extends JDialog {
     private final List<Double> xValues = new ArrayList<>();
@@ -24,21 +26,15 @@ public class TableWindow extends JDialog {
     private final JButton createButton = new JButton("Создать");
     private TabulatedFunction function;
 
-    public TableWindow() {
+    public TableWindow(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
         super();
+        setModal(true);
+        setLocationRelativeTo(null);
         getContentPane().setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setBounds(300, 300, 500, 500);
-        getContentPane().add(label);
-        getContentPane().add(countField);
-        getContentPane().add(inputButton);
-        getContentPane().add(createButton);
-
+        this.setBounds(300, 300, 500, 500);
+        addButtonListeners(callback);
         compose();
-        addButtonListeners();
-
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     void compose() {
@@ -65,7 +61,7 @@ public class TableWindow extends JDialog {
         );
     }
 
-    private void addButtonListeners() {
+    private void addButtonListeners(Consumer<? super TabulatedFunction> callback) {
         addListenerForInputButton();
         addListenerForCreateButton();
         addListenerForCountButton();
@@ -148,7 +144,8 @@ public class TableWindow extends JDialog {
         });
     }
 
-    public static void main(String[] args) {
-        new TableWindow();
+    public static void main(TabulatedFunctionFactory factory, Consumer<? super TabulatedFunction> callback) {
+        TableWindow app = new TableWindow(factory, callback);
+        app.setVisible(true);
     }
 }

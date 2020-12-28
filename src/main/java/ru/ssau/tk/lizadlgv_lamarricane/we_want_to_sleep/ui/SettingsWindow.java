@@ -1,9 +1,13 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.ui;
 
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.*;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.LinkedListTabulatedFunctionFactory;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SettingsWindow extends JDialog {

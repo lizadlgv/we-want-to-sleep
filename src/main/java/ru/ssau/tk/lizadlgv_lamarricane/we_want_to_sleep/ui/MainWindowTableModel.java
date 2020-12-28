@@ -58,6 +58,7 @@ public class MainWindowTableModel extends AbstractTableModel {
         }
         return false;
     }
+
     @Override
     public String getColumnName(int column) {
         switch (column) {
@@ -79,4 +80,3 @@ public class MainWindowTableModel extends AbstractTableModel {
         this.function = function;
     }
 }
-

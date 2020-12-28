@@ -10,22 +10,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class FileWriter extends JDialog {
-    private TabulatedFunction function;
-
     public FileWriter(TabulatedFunction func) {
         setModal(true);
-        this.function = func;
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.addChoosableFileFilter(
                 new FileNameExtensionFilter("Bin files", "bin"));
+
         chooser.setAcceptAllFileFilterUsed(false);
         int rVal = chooser.showSaveDialog(FileWriter.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             if (file != null) {
                 try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
-                    FunctionsIO.writeTabulatedFunction(outputStream, function);
+                    FunctionsIO.writeTabulatedFunction(outputStream, func);
                 } catch (Exception e) {
                     new ErrorWindow(this, e);
                 }
