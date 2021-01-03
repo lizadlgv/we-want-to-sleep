@@ -164,6 +164,27 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testRemove() {
+        ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
+        testDefinedThroughArrays.remove(0);
+        testDefinedThroughArrays.remove(6);
+        testDefinedThroughArrays.remove(5);
+       /* old array: [(-3, -13) (-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (3, 9) (4, 13) (5, 25)]
+        array: [(-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (4, 13)] */
+        assertEquals(testDefinedThroughArrays.getX(0), -2, DELTA);
+        assertEquals(testDefinedThroughArrays.getX(1), -1, DELTA);
+        assertEquals(testDefinedThroughArrays.getX(2), 0, DELTA);
+        assertEquals(testDefinedThroughArrays.getX(3), 1, DELTA);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            double[] valuesXTest = new double[]{-13., 21.};
+            double[] valuesYTest = new double[]{19., 44.};
+            ArrayTabulatedFunction testRemove = new ArrayTabulatedFunction(valuesXTest, valuesYTest);
+            testRemove.remove(0);
+        });
+    }
+
+    @Test
     public void testComplexFunctions() {
         double xFrom = 5;
         double xTo = 10;
