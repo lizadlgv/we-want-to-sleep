@@ -52,7 +52,7 @@ public class MainWindow extends JFrame {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPane = new JScrollPane(table);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)                      
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCreateTFunction)
                         .addComponent(buttonCreateMathFunction)
