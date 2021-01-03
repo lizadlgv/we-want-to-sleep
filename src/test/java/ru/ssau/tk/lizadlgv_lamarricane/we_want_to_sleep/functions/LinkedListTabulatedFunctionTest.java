@@ -2,6 +2,9 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import static org.testng.Assert.*;
+
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
@@ -220,5 +223,33 @@ public class LinkedListTabulatedFunctionTest {
         softAssert.assertEquals(j, 5);
         assertThrows(NoSuchElementException.class, iterator::next);
         softAssert.assertAll();
+    }
+
+    @Test
+    public void testInsert() {
+        double[] valuesXFirst = new double[]{-1., 79.};
+        double[] valuesYFirst = new double[]{-1., 46.};
+        LinkedListTabulatedFunction testInsertLinkedListFirst = new LinkedListTabulatedFunction(valuesXFirst, valuesYFirst);
+
+        testInsertLinkedListFirst.insert(0, 0);
+        testInsertLinkedListFirst.insert(1., 1.);
+        testInsertLinkedListFirst.insert(6., 9.);
+        testInsertLinkedListFirst.insert(13., 26.);
+        testInsertLinkedListFirst.insert(77., 33.);
+
+        assertEquals(testInsertLinkedListFirst.getX(0), 0, DELTA);
+        assertEquals(testInsertLinkedListFirst.getY(0), 0, DELTA);
+
+        assertEquals(testInsertLinkedListFirst.getX(1), -1, DELTA);
+        assertEquals(testInsertLinkedListFirst.getY(1), -1, DELTA);
+
+        assertEquals(testInsertLinkedListFirst.getX(2), 1, DELTA);
+        assertEquals(testInsertLinkedListFirst.getY(2), 1, DELTA);
+
+        assertEquals(testInsertLinkedListFirst.getX(3), 6, DELTA);
+        assertEquals(testInsertLinkedListFirst.getY(3), 9, DELTA);
+
+        assertNotEquals(testInsertLinkedListFirst.getX(4), 33, DELTA);
+        assertNotEquals(testInsertLinkedListFirst.getY(4), 77, DELTA);
     }
 }
