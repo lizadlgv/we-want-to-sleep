@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implements Serializable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Insertable {
     private static final long serialVersionUID = 925973407340487180L;
-    private final double[] xValues;
-    private final double[] yValues;
+    private double[] xValues;
+    private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
@@ -144,5 +144,32 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implement
                 return point;
             }
         };
+    }
+
+    @Override
+    public void insert(double x, double y) {
+        int i = indexOfX(x);
+        if (i != -1) {
+            setY(i, y);
+        } else {
+            double[] xNewValues = new double[count + 1];
+            double[] yNewValues = new double[count + 1];
+            if (x < leftBound()) {
+                xNewValues[0] = x;
+                yNewValues[0] = y;
+                System.arraycopy(xValues, 0, xNewValues, 1, count);
+                System.arraycopy(yValues, 0, yNewValues, 1, count);
+            } else {
+                System.arraycopy(xValues, 0, xNewValues, 0, floorIndexOfX(x) + 1);
+                System.arraycopy(yValues, 0, yNewValues, 0, floorIndexOfX(x) + 1);
+                xNewValues[floorIndexOfX(x) + 1] = x;
+                yNewValues[floorIndexOfX(x) + 1] = y;
+                System.arraycopy(xValues, floorIndexOfX(x) + 1, xNewValues, floorIndexOfX(x) + 2, count - floorIndexOfX(x) - 1);
+                System.arraycopy(yValues, floorIndexOfX(x) + 1, yNewValues, floorIndexOfX(x) + 2, count - floorIndexOfX(x) - 1);
+            }
+            this.xValues = xNewValues;
+            this.yValues = yNewValues;
+            count++;
+        }
     }
 }
