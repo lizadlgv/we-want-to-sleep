@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implements Serializable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Insertable, Removable {
     private static final long serialVersionUID = 925973407340487180L;
-    private final double[] xValues;
-    private final double[] yValues;
+    private double[] xValues;
+    private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
@@ -144,5 +144,56 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implement
                 return point;
             }
         };
+    }
+
+    @Override
+    public void insert(double x, double y) {
+        if (indexOfX(x) != -1) {
+            setY(indexOfX(x), y);
+        } else {
+            double[] xNewValues = new double[count + 1];
+            double[] yNewValues = new double[count + 1];
+            if (x < leftBound()) {
+                xNewValues[0] = x;
+                yNewValues[0] = y;
+                System.arraycopy(xValues, 0, xNewValues, 1, count);
+                System.arraycopy(yValues, 0, yNewValues, 1, count);
+            } else {
+                if (x > rightBound()) {
+                    System.arraycopy(xValues, 0, xNewValues, 0, count);
+                    System.arraycopy(yValues, 0, yNewValues, 0, count);
+                    xNewValues[count] = x;
+                    yNewValues[count] = y;
+                } else {
+                    int i = floorIndexOfX(x);
+                    System.arraycopy(xValues, 0, xNewValues, 0, i + 1);
+                    System.arraycopy(yValues, 0, yNewValues, 0, i + 1);
+                    xNewValues[i + 1] = x;
+                    yNewValues[i + 1] = y;
+                    System.arraycopy(xValues, i + 1, xNewValues, i + 2, count - i - 1);
+                    System.arraycopy(yValues, i + 1, yNewValues, i + 2, count - i - 1);
+                }
+            }
+            this.xValues = xNewValues;
+            this.yValues = yNewValues;
+            count++;
+        }
+    }
+
+    @Override
+    public void remove(int index) {
+        if (count <= 2) {
+            throw new IllegalArgumentException("Less than minimum length");
+        }
+        double[] xTempValues = new double[count - 1];
+        double[] yTempValues = new double[count - 1];
+
+        System.arraycopy(xValues, 0, xTempValues, 0, index);
+        System.arraycopy(yValues, 0, yTempValues, 0, index);
+        System.arraycopy(xValues, index + 1, xTempValues, index, count - index - 1);
+        System.arraycopy(yValues, index + 1, yTempValues, index, count - index - 1);
+        this.xValues = xTempValues;
+        this.yValues = yTempValues;
+        count--;
     }
 }

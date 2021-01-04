@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Insertable {
     private static final long serialVersionUID = 1242481747488848027L;
     private Node head;
-    private int count = 0;
 
     private static class Node implements Serializable {
         private static final long serialVersionUID = -915459550670427647L;
@@ -18,7 +17,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         public Node prev;
         public double x;
         public double y;
-
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
@@ -53,6 +51,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         newNode.x = x;
         newNode.y = y;
         if (head == null) {
+            count = 0;
             head = newNode;
             newNode.prev = newNode;
             newNode.next = newNode;
@@ -63,7 +62,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             last.next = newNode;
         }
         head.prev = newNode;
-        count += 1;
+        count++;
     }
 
     private Node getNode(int index) {
@@ -227,10 +226,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     public void insert(double x, double y) {
         if (count == 0) {
             addNode(x, y);
-
         } else if (indexOfX(x) != -1) {
             setY(indexOfX(x), y);
-
         } else {
             int index = floorIndexOfX(x);
             Node newNode = new Node();

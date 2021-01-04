@@ -25,18 +25,6 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
-    public void testInsert() {
-        ArrayTabulatedFunction getDefinedThroughArrays = new ArrayTabulatedFunction(valuesX, valuesY);
-        ArrayTabulatedFunction getDefinedThroughMathFunction = new ArrayTabulatedFunction(sqrFunc, 0, 9, 109);
-
-        getDefinedThroughArrays.insert(-3., 10.);
-        getDefinedThroughArrays.insert(0., 8.);
-        getDefinedThroughArrays.insert(-6., -6.);
-        getDefinedThroughArrays.insert(0.5, 10);
-
-    }
-
-    @Test
     public void testConstructorException() {
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[6], new double[1]));
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[1], new double[2]));
@@ -176,27 +164,6 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
-    public void testRemove() {
-        ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
-        testDefinedThroughArrays.remove(0);
-        testDefinedThroughArrays.remove(6);
-        testDefinedThroughArrays.remove(5);
-       /* old array: [(-3, -13) (-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (3, 9) (4, 13) (5, 25)]
-        array: [(-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (4, 13)] */
-        assertEquals(testDefinedThroughArrays.getX(0), -2, DELTA);
-        assertEquals(testDefinedThroughArrays.getX(1), -1, DELTA);
-        assertEquals(testDefinedThroughArrays.getX(2), 0, DELTA);
-        assertEquals(testDefinedThroughArrays.getX(3), 1, DELTA);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            double[] valuesXTest = new double[]{-13., 21.};
-            double[] valuesYTest = new double[]{19., 44.};
-            ArrayTabulatedFunction testRemove = new ArrayTabulatedFunction(valuesXTest, valuesYTest);
-            testRemove.remove(0);
-        });
-    }
-
-    @Test
     public void testComplexFunctions() {
         double xFrom = 5;
         double xTo = 10;
@@ -232,5 +199,56 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(getDefinedThroughArrays().getY(i++), point.y, DELTA);
         }
         assertEquals(i, 9);
+    }
+
+    @Test
+    public void testInsert() {
+        double[] valuesX = new double[]{0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.};
+        double[] valuesY = new double[]{0., 2., 4., 6., 8., 10., 12., 14., 16., 18., 20.};
+        ArrayTabulatedFunction testDefinedThroughArrays = new ArrayTabulatedFunction(valuesX, valuesY);
+
+        for (int i = 0; i < testDefinedThroughArrays.getCount(); i++) {
+            assertEquals(testDefinedThroughArrays.getX(i), i, DELTA);
+            assertEquals(testDefinedThroughArrays.getY(i), 2 * i, DELTA);
+        }
+        testDefinedThroughArrays.insert(-1., -2.);
+        testDefinedThroughArrays.insert(11., 22.);
+        for (int i = 0; i < testDefinedThroughArrays.getCount(); i++) {
+            assertEquals(testDefinedThroughArrays.getX(i), i - 1, DELTA);
+            assertEquals(testDefinedThroughArrays.getY(i), 2 * (i - 1), DELTA);
+        }
+
+        testDefinedThroughArrays.insert(-1., 3.);
+        assertEquals(testDefinedThroughArrays.getX(0), -1., DELTA);
+        assertEquals(testDefinedThroughArrays.getY(0), 3., DELTA);
+        testDefinedThroughArrays.insert(5.5, 11.);
+        assertEquals(testDefinedThroughArrays.getX(7), 5.5, DELTA);
+        assertEquals(testDefinedThroughArrays.getY(7), 11., DELTA);
+        testDefinedThroughArrays.insert(6., 14.);
+        assertEquals(testDefinedThroughArrays.getX(8), 6., DELTA);
+        assertEquals(testDefinedThroughArrays.getY(8), 14., DELTA);
+
+        assertEquals(testDefinedThroughArrays.getCount(), 14);
+    }
+
+    @Test
+    public void testRemove() {
+        ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
+        testDefinedThroughArrays.remove(0);
+        testDefinedThroughArrays.remove(6);
+        testDefinedThroughArrays.remove(5);
+        /* old array: [(-3, -13) (-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (3, 9) (4, 13) (5, 25)]
+        array: [(-2, -4) (-1, -1) (0, 0) (1, 1) (2, 4) (4, 13)] */
+        assertEquals(testDefinedThroughArrays.getX(0), -2., DELTA);
+        assertEquals(testDefinedThroughArrays.getX(1), -1., DELTA);
+        assertEquals(testDefinedThroughArrays.getX(2), 0., DELTA);
+        assertEquals(testDefinedThroughArrays.getX(3), 1., DELTA);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            double[] valuesXTest = new double[]{-13., 21.};
+            double[] valuesYTest = new double[]{19., 44.};
+            ArrayTabulatedFunction testRemove = new ArrayTabulatedFunction(valuesXTest, valuesYTest);
+            testRemove.remove(0);
+        });
     }
 }
