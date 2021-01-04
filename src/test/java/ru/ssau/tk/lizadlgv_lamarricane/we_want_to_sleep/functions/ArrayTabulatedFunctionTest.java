@@ -25,6 +25,18 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testInsert() {
+        ArrayTabulatedFunction getDefinedThroughArrays = new ArrayTabulatedFunction(valuesX, valuesY);
+        ArrayTabulatedFunction getDefinedThroughMathFunction = new ArrayTabulatedFunction(sqrFunc, 0, 9, 109);
+
+        getDefinedThroughArrays.insert(-3., 10.);
+        getDefinedThroughArrays.insert(0., 8.);
+        getDefinedThroughArrays.insert(-6., -6.);
+        getDefinedThroughArrays.insert(0.5, 10);
+
+    }
+
+    @Test
     public void testConstructorException() {
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[6], new double[1]));
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[1], new double[2]));

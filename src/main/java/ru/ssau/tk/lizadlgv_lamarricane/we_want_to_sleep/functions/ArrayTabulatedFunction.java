@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Removable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implements Serializable {
     private static final long serialVersionUID = 925973407340487180L;
-    private double[] xValues;
-    private double[] yValues;
+    private final double[] xValues;
+    private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2 || yValues.length < 2) {
@@ -144,22 +144,5 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                 return point;
             }
         };
-    }
-
-    @Override
-    public void remove(int index) {
-        if (count <= 2) {
-            throw new IllegalArgumentException("Less than minimum length");
-        }
-        double[] xTempValues = new double[count - 1];
-        double[] yTempValues = new double[count - 1];
-
-        System.arraycopy(xValues, 0, xTempValues, 0, index);
-        System.arraycopy(yValues, 0, yTempValues, 0, index);
-        System.arraycopy(xValues, index + 1, xTempValues, index, count - index - 1);
-        System.arraycopy(yValues, index + 1, yTempValues, index, count - index - 1);
-        this.xValues = xTempValues;
-        this.yValues = yTempValues;
-        count--;
     }
 }
