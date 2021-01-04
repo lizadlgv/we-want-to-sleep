@@ -252,4 +252,18 @@ public class LinkedListTabulatedFunctionTest {
         assertNotEquals(testInsertLinkedListFirst.getX(4), 33, DELTA);
         assertNotEquals(testInsertLinkedListFirst.getY(4), 77, DELTA);
     }
+
+    @Test
+    public void testRemove() {
+        LinkedListTabulatedFunction testList = sampleFunction();
+        testList.remove(0);
+        testList.remove(2);
+        /* old array: [(0, 0) (1, 1) (2, 4) (3, 9) (4, 16)]
+        array: [(1, 1) (2, 4) (4, 16)] */
+        assertEquals(testList.getX(0), 1., DELTA);
+        assertEquals(testList.getX(1), 2., DELTA);
+        assertEquals(testList.getX(2), 4., DELTA);
+
+        assertEquals(testList.getCount(), 3, DELTA);
+    }
 }

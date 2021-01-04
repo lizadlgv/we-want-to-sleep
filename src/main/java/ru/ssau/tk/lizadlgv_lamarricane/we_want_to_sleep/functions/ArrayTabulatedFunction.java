@@ -1,5 +1,6 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions;
 
+import org.jetbrains.annotations.NotNull;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.exceptions.InterpolationException;
 
 import java.io.Serializable;
@@ -125,6 +126,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     @Override
+    @NotNull
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
             int i = 0;

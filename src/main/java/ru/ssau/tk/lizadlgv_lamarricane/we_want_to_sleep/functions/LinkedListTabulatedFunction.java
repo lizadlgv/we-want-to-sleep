@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Insertable {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable, Insertable, Removable {
     private static final long serialVersionUID = 1242481747488848027L;
     private Node head;
 
@@ -255,6 +255,22 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             }
             count++;
         }
+    }
+
+    @Override
+    public void remove(int index) {
+        if (count == 2) {
+            throw new UnsupportedOperationException("Length will become less than 2 points");
+        }
+
+        Node deletedNode = getNode(index);
+        if (index == 0) {
+            head = deletedNode.next;
+            head.prev = deletedNode.prev;
+        }
+        deletedNode.prev.next = deletedNode.next;
+        deletedNode.next.prev = deletedNode.prev;
+        count--;
     }
 
     @Override
