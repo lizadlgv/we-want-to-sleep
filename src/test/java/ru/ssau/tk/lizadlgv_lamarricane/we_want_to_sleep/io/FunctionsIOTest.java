@@ -2,9 +2,7 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.io;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.SqrFunction;
-import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.TabulatedFunction;
+import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.ArrayTabulatedFunctionFactory;
 
 import java.io.*;
@@ -39,9 +37,11 @@ public class FunctionsIOTest {
     }
 
     @Test
-    public void testInputOutputTabulatedFunction() throws IOException {
+    public void testInputOutputTabulatedFunction() {
         try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("temp/second function.bin"))) {
             FunctionsIO.writeTabulatedFunction(out, list);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try (BufferedInputStream in = new BufferedInputStream(new FileInputStream("temp/second function.bin"))) {
@@ -79,6 +79,30 @@ public class FunctionsIOTest {
             }
         } catch (IOException | ClassNotFoundException ioe) {
             ioe.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testJson() {
+        ArrayTabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValues, yValues);
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("temp/serialized array functions.Json"))) {
+            FunctionsIO.serializeJson(out, arrayFunction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedReader in = new BufferedReader(new FileReader("temp/serialized array functions.Json"))) {
+            TabulatedFunction resultArray = FunctionsIO.deserializeJson(in);
+
+            assertEquals(arrayFunction.getCount(), resultArray.getCount());
+
+            for (int i = 0; i < arrayFunction.getCount(); i++) {
+                assertEquals(arrayFunction.getX(i), resultArray.getX(i));
+                assertEquals(arrayFunction.getY(i), resultArray.getY(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
