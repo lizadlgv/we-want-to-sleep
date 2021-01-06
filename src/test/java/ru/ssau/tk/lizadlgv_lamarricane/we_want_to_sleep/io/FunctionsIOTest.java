@@ -106,6 +106,30 @@ public class FunctionsIOTest {
         }
     }
 
+    @Test
+    public void testXML() {
+        ArrayTabulatedFunction arrayFunction = new ArrayTabulatedFunction(xValues, yValues);
+
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("temp/serialized array functions.XML"))) {
+            FunctionsIO.serializeXml(out, arrayFunction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedReader in = new BufferedReader(new FileReader("temp/serialized array functions.XML"))) {
+            TabulatedFunction resultArray = FunctionsIO.deserializeXml(in);
+
+            assertEquals(arrayFunction.getCount(), resultArray.getCount());
+
+            for (int i = 0; i < arrayFunction.getCount(); i++) {
+                assertEquals(arrayFunction.getX(i), resultArray.getX(i));
+                assertEquals(arrayFunction.getY(i), resultArray.getY(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @AfterClass
     public void deleteOnExit() {
         for (File myFile : new File("temp").listFiles())

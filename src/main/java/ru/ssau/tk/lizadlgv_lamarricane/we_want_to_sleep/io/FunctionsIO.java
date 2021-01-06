@@ -1,6 +1,7 @@
 package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.io;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.xstream.XStream;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.*;
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.*;
 
@@ -81,5 +82,17 @@ public final class FunctionsIO {
     public static ArrayTabulatedFunction deserializeJson(BufferedReader reader) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readerFor(ArrayTabulatedFunction.class).readValue(reader);
+    }
+
+    static void serializeXml(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
+        XStream xmlWriter = new XStream();
+        String xmlString = xmlWriter.toXML(function);
+        writer.write(xmlString);
+        writer.flush();
+    }
+
+    static ArrayTabulatedFunction deserializeXml(BufferedReader reader) {
+        XStream xmlReader = new XStream();
+        return (ArrayTabulatedFunction) xmlReader.fromXML(reader);
     }
 }
