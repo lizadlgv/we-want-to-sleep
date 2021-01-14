@@ -2,8 +2,14 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.ui;
 
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.BasicScrollPaneUI;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
@@ -29,6 +35,7 @@ public class MainWindow extends JFrame {
         getContentPane().add(openButton);
         getContentPane().add(saveButton);
         setLocationRelativeTo(null);
+        setContentPane(new BgPanel());
         compose();
         addButtonListeners();
         setVisible(true);
@@ -52,7 +59,7 @@ public class MainWindow extends JFrame {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPane = new JScrollPane(table);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)                      
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCreateTFunction)
                         .addComponent(buttonCreateMathFunction)
@@ -142,6 +149,18 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
+        window.setBackground(new Color(67, 61, 123));
         window.setVisible(true);
+    }
+
+    class BgPanel extends JPanel {
+        public void paintComponent(Graphics g) {
+            Image im = null;
+            try {
+                im = ImageIO.read(new File("C:\\Users\\Мария\\Downloads\\CUsersМарияDownloads.jpg"));
+            } catch (IOException e) {
+            }
+            g.drawImage(im, 0, -50, null);
+        }
     }
 }
