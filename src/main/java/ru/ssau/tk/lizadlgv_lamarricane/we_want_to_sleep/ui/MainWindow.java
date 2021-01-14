@@ -2,8 +2,11 @@ package ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.ui;
 
 import ru.ssau.tk.lizadlgv_lamarricane.we_want_to_sleep.functions.factory.TabulatedFunctionFactory;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
@@ -12,6 +15,8 @@ public class MainWindow extends JFrame {
     private final JButton buttonCreateMathFunction = new JButton("Создать табулированную функцию с помощью другой функции");
     private final JButton openButton = new JButton("Открыть функцию");
     private final JButton saveButton = new JButton("Сохранить функцию");
+    private final JButton buttonDifferentiation = new JButton("Дифференцирование функции");
+    private final JButton compositeFunctionButton = new JButton("Сложная функция");
     private final ArrayList<Double> xValues = new ArrayList<>();
     private final ArrayList<Double> yValues = new ArrayList<>();
     private final MainWindowTableModel tableModel = new MainWindowTableModel();
@@ -22,13 +27,15 @@ public class MainWindow extends JFrame {
         super("Основное окно");
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(300, 300, 1200, 500);
+        setSize(550, 320);
+        setBounds(300, 300, 1700, 500);
         getContentPane().add(buttonCreateTFunction);
         getContentPane().add(buttonCreateMathFunction);
         getContentPane().add(buttonSettings);
         getContentPane().add(openButton);
         getContentPane().add(saveButton);
         setLocationRelativeTo(null);
+        setContentPane(new BgPanel());
         compose();
         addButtonListeners();
         setVisible(true);
@@ -52,10 +59,12 @@ public class MainWindow extends JFrame {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         JScrollPane tableScrollPane = new JScrollPane(table);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)                      
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCreateTFunction)
                         .addComponent(buttonCreateMathFunction)
+                        .addComponent(buttonDifferentiation, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonSettings)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -65,6 +74,8 @@ public class MainWindow extends JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(buttonCreateTFunction)
                         .addComponent(buttonCreateMathFunction)
+                        .addComponent(buttonDifferentiation, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(compositeFunctionButton, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonSettings)
                         .addComponent(openButton)
                         .addComponent(saveButton))
@@ -142,6 +153,18 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
+        window.setBackground(new Color(67, 61, 123));
         window.setVisible(true);
+    }
+
+    class BgPanel extends JPanel {
+        public void paintComponent(Graphics g) {
+            Image im = null;
+            try {
+                im = ImageIO.read(new File("C:\\Users\\Мария\\Downloads\\CUsersМарияDownloads.jpg"));
+            } catch (IOException e) {
+            }
+            g.drawImage(im, 0, -50, null);
+        }
     }
 }
